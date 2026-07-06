@@ -31,7 +31,7 @@ export default function Home() {
           <div className="max-w-2xl">
             <p className="eyebrow">Maison de parfum</p>
             <h1 className="mt-6 font-serif text-6xl font-semibold leading-[0.9] text-ink dark:text-silk sm:text-7xl lg:text-8xl">
-              OSCII
+              PRECEA
             </h1>
             <p className="mt-7 max-w-xl text-lg leading-8 text-ink/75 dark:text-silk/75">
               Cinematic extrait fragrances crafted with rare materials, modern restraint, and the quiet gravity of true luxury.
@@ -73,35 +73,37 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="container-luxe pb-20">
-        <div className="max-w-2xl">
-          <p className="eyebrow">Testimonials</p>
-          <h2 className="mt-3 font-serif text-5xl font-semibold">What customers say</h2>
-          <p className="mt-4 text-ink/70 dark:text-silk/70">
-            Real feedback from people who wear OSCII every day.
-          </p>
-        </div>
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {testimonials.map((item) => (
-            <article
-              key={item.id}
-              className="flex h-full flex-col rounded-xl border border-ink/10 bg-white/55 p-5 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-white/10"
-            >
-              <div className="flex items-center gap-1 text-champagne">
-                {Array.from({ length: item.rating }).map((_, index) => (
-                  <Star key={`${item.id}-star-${index}`} className="size-4 fill-current" />
-                ))}
-              </div>
-              <p className="mt-4 flex-1 text-sm leading-6 text-ink/75 dark:text-silk/75">"{item.quote}"</p>
-              <div className="mt-5 border-t border-ink/10 pt-4 dark:border-white/10">
-                <p className="font-medium">{item.name}</p>
-                <p className="text-xs text-smoke">{item.city}</p>
-                <Link href={`/products/${item.productSlug}`} className="mt-2 inline-block text-xs font-semibold uppercase tracking-[0.18em] text-rosewood dark:text-champagne">
-                  View fragrance
-                </Link>
-              </div>
-            </article>
-          ))}
+      <section className="bg-pearl py-20 dark:bg-white/5">
+        <div className="container-luxe grid gap-12 lg:grid-cols-[minmax(0,280px)_1fr] lg:items-start lg:gap-16">
+          <div>
+            <p className="eyebrow">Testimonials</p>
+            <h2 className="mt-3 font-serif text-5xl font-semibold">What customers say</h2>
+            <p className="mt-4 text-ink/70 dark:text-silk/70">
+              Real feedback from people who wear PRECEA every day.
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {testimonials.map((item) => (
+              <article
+                key={item.id}
+                className="flex h-full flex-col rounded-xl bg-white p-5 shadow-sm dark:border dark:border-white/10 dark:bg-white/10"
+              >
+                <div className="flex items-center gap-1 text-champagne">
+                  {Array.from({ length: item.rating }).map((_, index) => (
+                    <Star key={`${item.id}-star-${index}`} className="size-4 fill-current" />
+                  ))}
+                </div>
+                <p className="mt-4 flex-1 text-sm leading-6 text-ink/75 dark:text-silk/75">"{item.quote}"</p>
+                <div className="mt-5 border-t border-ink/10 pt-4 dark:border-white/10">
+                  <p className="font-medium">{item.name}</p>
+                  <p className="text-xs text-smoke">{item.city}</p>
+                  <Link href={`/products/${item.productSlug}`} className="mt-2 inline-block text-xs font-semibold uppercase tracking-[0.18em] text-rosewood dark:text-champagne">
+                    View fragrance
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -136,7 +138,7 @@ export default function Home() {
           <p className="eyebrow">The ritual</p>
           <h2 className="mt-3 font-serif text-5xl font-semibold">Luxury made tactile, not loud</h2>
           <p className="mt-5 text-lg leading-8 text-ink/70 dark:text-silk/70">
-            Every OSCII order is prepared with archival paper, discovery vials, and a care card matched to the fragrance family.
+            Every PRECEA™ order is prepared with archival paper, discovery vials, and a care card matched to the fragrance family.
           </p>
           <a
             href={whatsappUrl(buildGeneralOrderMessage())}

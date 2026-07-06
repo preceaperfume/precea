@@ -8,7 +8,7 @@ export function SiteFooter() {
     <footer className="border-t border-ink/10 bg-ink text-silk dark:border-white/10 dark:bg-noir">
       <div className="container-luxe grid gap-10 py-12 md:grid-cols-[1.2fr_.8fr_.8fr]">
         <div>
-          <p className="font-serif text-3xl font-semibold">OSCII</p>
+          <p className="font-serif text-3xl font-semibold">PRECEA</p>
           <p className="mt-4 max-w-sm text-sm leading-6 text-silk/70">
             A modern fragrance house composing rare materials into cinematic signatures for daily ritual.
           </p>
@@ -38,7 +38,6 @@ export function SiteFooter() {
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-champagne">Maison</p>
           <Link href="/products">Perfumes</Link>
           <Link href="/attar">Attar</Link>
-          <Link href="/account">Wishlist</Link>
           <a href={whatsappUrl(buildGeneralOrderMessage())} target="_blank" rel="noopener noreferrer">
             Order on WhatsApp
           </a>

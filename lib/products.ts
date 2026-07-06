@@ -32,57 +32,70 @@ export type Testimonial = {
 };
 
 export const products: Product[] = [
+  // {
+  //   id: "parfum-01",
+  //   slug: "velvet-iris-absolu",
+  //   name: "Velvet Iris Absolu",
+  //   collection: "Nocturne Collection",
+  //   price: 285,
+  //   size: "75 ml",
+  //   mood: "Powdered iris, smoked vanilla, silk at midnight",
+  //   intensity: "Opulent",
+  //   family: "Floral",
+  //   rating: 4.9,
+  //   reviews: 184,
+  //   bestseller: true,
+  //   notes: {
+  //     top: ["Bergamot", "Pink pepper", "Violet leaf"],
+  //     heart: ["Orris butter", "Jasmine sambac", "Suede"],
+  //     base: ["Vanilla smoke", "Sandalwood", "Amber resin"]
+  //   },
+  //   description:
+  //     "A couture iris wrapped in cool suede and slow-burning vanilla smoke. Polished, intimate, and impossibly smooth.",
+  //   images: [
+  //     "https://upload.meeshosupplyassets.com/cataloging/1783141113975/ChatGPTImageMay14202605_44_02PM.png",
+  //     "https://upload.meeshosupplyassets.com/cataloging/1783141113975/ChatGPTImageMay14202605_44_02PM.png"
+  //   ]
+  // },
   {
-    id: "parfum-01",
-    slug: "velvet-iris-absolu",
-    name: "Velvet Iris Absolu",
-    collection: "Nocturne Collection",
-    price: 285,
-    size: "75 ml",
-    mood: "Powdered iris, smoked vanilla, silk at midnight",
-    intensity: "Opulent",
-    family: "Floral",
-    rating: 4.9,
-    reviews: 184,
-    bestseller: true,
-    notes: {
-      top: ["Bergamot", "Pink pepper", "Violet leaf"],
-      heart: ["Orris butter", "Jasmine sambac", "Suede"],
-      base: ["Vanilla smoke", "Sandalwood", "Amber resin"]
+    "id": "attar-01",
+    "slug": "black-opium-attar-for-men-sweet-vanilla-soft-spicy-long-lasting-alcohol-free-perfume-oil-roll-on",
+    "name": "Black Opium Attar",
+    "collection": "Exotic Attars",
+    "price": 349,
+    "size": "12 ml",
+    "mood": "Damask rose, honeyed petals, warm sandalwood oil",
+    "intensity": "Strong",
+    "family": "Oriental Vanilla",
+    "rating": 4.9,
+    "reviews": 156,
+    "kind": "attar",
+    "bestseller": true,
+    "notes": {
+        "top": [
+            "Pink Pepper",
+            "Orange Blossom",
+            "Pear"
+        ],
+        "heart": [
+            "Coffee",
+            "Jasmine",
+            "Bitter Almond",
+            "Licorice"
+        ],
+        "base": [
+            "Vanilla",
+            "Patchouli",
+            "Cedarwood",
+            "Cashmere Wood"
+        ]
     },
-    description:
-      "A couture iris wrapped in cool suede and slow-burning vanilla smoke. Polished, intimate, and impossibly smooth.",
-    images: [
-      "https://upload.meeshosupplyassets.com/cataloging/1783141113975/ChatGPTImageMay14202605_44_02PM.png",
-      "https://upload.meeshosupplyassets.com/cataloging/1783141113975/ChatGPTImageMay14202605_44_02PM.png"
+    "description": "Black Opium Attar is a rich blend of warm vanilla, bold coffee, and delicate white florals, creating a sensual and captivating fragrance. Its long-lasting alcohol-free formula is perfect for everyday wear as well as evenings and special occasions.",
+    "images": [
+        "https://upload.meeshosupplyassets.com/cataloging/1783141113975/ChatGPTImageMay14202605_44_02PM.png",
+        "https://upload.meeshosupplyassets.com/cataloging/1783141113975/ChatGPTImageMay14202605_44_02PM.png"
     ]
-  },
-  {
-    id: "attar-01",
-    slug: "gulab-noor-attar",
-    name: "Gulab Noor Attar",
-    collection: "Sacred Attars",
-    price: 95,
-    size: "12 ml",
-    mood: "Damask rose, honeyed petals, warm sandalwood oil",
-    intensity: "Opulent",
-    family: "Floral",
-    rating: 4.9,
-    reviews: 156,
-    kind: "attar",
-    bestseller: true,
-    notes: {
-      top: ["Rose otto", "Saffron"],
-      heart: ["Damask rose", "Jasmine", "Geranium"],
-      base: ["Sandalwood", "Amber", "Musk"]
-    },
-    description:
-      "A classical rose attar distilled in the traditional deg-bhapka method, rich with honeyed petals and creamy sandalwood depth.",
-    images: [
-      "https://upload.meeshosupplyassets.com/cataloging/1783141113975/ChatGPTImageMay14202605_44_02PM.png",
-      "https://upload.meeshosupplyassets.com/cataloging/1783141113975/ChatGPTImageMay14202605_44_02PM.png"
-    ]
-  },
+},
  
 ];
 
@@ -148,6 +161,6 @@ export const attars = products.filter((product) => product.kind === "attar");
 export const formatPrice = (price: number) =>
   new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "USD",
+    currency: "INR",
     maximumFractionDigits: 0
   }).format(price);

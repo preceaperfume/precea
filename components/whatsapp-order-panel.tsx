@@ -8,6 +8,7 @@ import { useWishlistStore } from "@/store/wishlist";
 
 export function WhatsAppOrderPanel({ product }: { product: Product }) {
   const toggleWishlist = useWishlistStore((state) => state.toggleWishlist);
+  const openWishlist = useWishlistStore((state) => state.openWishlist);
   const wishlist = useWishlistStore((state) => state.wishlist);
   const wished = wishlist.includes(product.id);
 
@@ -20,7 +21,10 @@ export function WhatsAppOrderPanel({ product }: { product: Product }) {
         </div>
         <button
           type="button"
-          onClick={() => toggleWishlist(product.id)}
+          onClick={() => {
+            toggleWishlist(product.id);
+            if (!wished) openWishlist();
+          }}
           aria-label={wished ? "Remove from wishlist" : "Add to wishlist"}
           className="grid size-12 place-items-center rounded-full border border-ink/10 dark:border-white/10"
         >

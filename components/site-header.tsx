@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { Menu, MessageCircle, UserRound, X } from "lucide-react";
+import { Menu, MessageCircle, Heart, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { whatsappUrl, buildGeneralOrderMessage } from "@/lib/whatsapp";
+import { useWishlistStore } from "@/store/wishlist";
 
 type NavItem = {
   href: string;
@@ -48,7 +49,10 @@ export function SiteHeader() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [menuOpen, setMenuOpen] = useState(false);
+  const wishlist = useWishlistStore((state) => state.wishlist);
+  const openWishlist = useWishlistStore((state) => state.openWishlist);
 
+  
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname, searchParams]);
@@ -71,7 +75,7 @@ export function SiteHeader() {
     <header className="header-enter relative sticky top-0 z-50 border-b border-ink/10 bg-silk/80 backdrop-blur-2xl dark:border-white/10 dark:bg-noir/70">
       <div className="container-luxe flex h-[4.5rem] items-center justify-between gap-4">
         <Link href="/" prefetch className="font-serif text-2xl font-semibold tracking-[0.18em]">
-          OSCII
+          PRECEA
         </Link>
         <nav className="hidden items-center gap-10 text-sm font-medium tracking-[0.06em] md:flex">
           {navItems.map((item) => {
@@ -92,6 +96,20 @@ export function SiteHeader() {
         </nav>
         <div className="flex items-center gap-2">
           <ThemeToggle />
+
+          <button
+            type="button"
+            aria-label="Open wishlist"
+            onClick={openWishlist}
+            className="relative grid size-10 place-items-center rounded-full border border-ink/10 bg-white/45 transition hover:border-champagne hover:bg-white/75 dark:border-white/10 dark:bg-white/10 dark:hover:bg-white/15"
+          >
+            <Heart className="size-4" />
+            {wishlist.length > 0 && (
+              <span className="absolute -right-0.5 -top-0.5 grid min-w-4 place-items-center rounded-full bg-rosewood px-1 text-[10px] font-bold leading-4 text-silk dark:bg-champagne dark:text-ink">
+                {wishlist.length}
+              </span>
+            )}
+          </button>
 
           <a
             href={whatsappUrl(buildGeneralOrderMessage())}

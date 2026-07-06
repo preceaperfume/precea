@@ -3,7 +3,7 @@ import { AttarFilters } from "@/components/attar-filters";
 
 export const metadata: Metadata = {
   title: "Attar",
-  description: "Shop OSCII traditional attars — concentrated perfume oils distilled with rare botanicals and aged sandalwood."
+  description: "Shop PRECEA traditional attars — concentrated perfume oils distilled with rare botanicals and aged sandalwood."
 };
 
 export default async function AttarPage({

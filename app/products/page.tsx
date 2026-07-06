@@ -3,7 +3,7 @@ import { ProductFilters } from "@/components/product-filters";
 
 export const metadata: Metadata = {
   title: "Perfumes",
-  description: "Shop OSCII luxury perfumes by collection, scent family, rating, and price."
+  description: "Shop PRECEA luxury perfumes by collection, scent family, rating, and price."
 };
 
 export default async function ProductsPage({
