@@ -6,8 +6,8 @@ export type Product = {
   price: number;
   size: string;
   mood: string;
-  intensity: "Soft" | "Luminous" | "Opulent" | "Nocturne";
-  family: "Floral" | "Amber" | "Woody" | "Fresh";
+  intensity: string;
+  family: string;
   rating: number;
   reviews: number;
   kind?: "parfum" | "attar";
@@ -72,31 +72,31 @@ export const products: Product[] = [
     "kind": "attar",
     "bestseller": true,
     "notes": {
-        "top": [
-            "Pink Pepper",
-            "Orange Blossom",
-            "Pear"
-        ],
-        "heart": [
-            "Coffee",
-            "Jasmine",
-            "Bitter Almond",
-            "Licorice"
-        ],
-        "base": [
-            "Vanilla",
-            "Patchouli",
-            "Cedarwood",
-            "Cashmere Wood"
-        ]
+      "top": [
+        "Pink Pepper",
+        "Orange Blossom",
+        "Pear"
+      ],
+      "heart": [
+        "Coffee",
+        "Jasmine",
+        "Bitter Almond",
+        "Licorice"
+      ],
+      "base": [
+        "Vanilla",
+        "Patchouli",
+        "Cedarwood",
+        "Cashmere Wood"
+      ]
     },
     "description": "Black Opium Attar is a rich blend of warm vanilla, bold coffee, and delicate white florals, creating a sensual and captivating fragrance. Its long-lasting alcohol-free formula is perfect for everyday wear as well as evenings and special occasions.",
     "images": [
-        "https://upload.meeshosupplyassets.com/cataloging/1783141113975/ChatGPTImageMay14202605_44_02PM.png",
-        "https://upload.meeshosupplyassets.com/cataloging/1783141113975/ChatGPTImageMay14202605_44_02PM.png"
+      "https://upload.meeshosupplyassets.com/cataloging/1783141113975/ChatGPTImageMay14202605_44_02PM.png",
+      "https://upload.meeshosupplyassets.com/cataloging/1783141113975/ChatGPTImageMay14202605_44_02PM.png"
     ]
-},
- 
+  },
+
 ];
 
 export const collections = [
