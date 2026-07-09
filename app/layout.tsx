@@ -1,19 +1,24 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import "./globals.css";
+import favicon from "./favicon.png";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader, SiteHeaderFallback } from "@/components/site-header";
 import { WishlistPopup } from "@/components/wishlist-popup";
+import { getProducts } from "@/lib/products";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://precea-parfum.example"),
   title: {
-    default: "PRECEA | Modern Luxury Fragrance House",
+    default: "PRECEA™  | Modern Luxury Fragrance House",
     template: "%s | PRECEA"
   },
   description:
     "Discover PRECEA, a modern luxury fragrance house crafting cinematic perfumes, extrait collections, and refined scent rituals.",
   keywords: ["luxury perfume", "niche fragrance", "eau de parfum", "PRECEA"],
+  icons: {
+    icon: favicon.src
+  },
   openGraph: {
     title: "PRECEA",
     description: "Cinematic modern fragrances composed with rare materials and quiet restraint.",
@@ -28,11 +33,13 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const products = await getProducts();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="font-sans antialiased">
@@ -40,7 +47,7 @@ export default function RootLayout({
           <SiteHeader />
         </Suspense>
         <main>{children}</main>
-        <WishlistPopup />
+        <WishlistPopup products={products} />
         <SiteFooter />
       </body>
     </html>

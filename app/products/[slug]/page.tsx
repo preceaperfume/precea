@@ -4,19 +4,20 @@ import { notFound } from "next/navigation";
 import { Star } from "lucide-react";
 import { WhatsAppOrderPanel } from "@/components/whatsapp-order-panel";
 import { ProductCard } from "@/components/product-card";
-import { formatPrice, getPrimaryProductImage, getProduct, products } from "@/lib/products";
+import { formatPrice, getPrimaryProductImage, getProductBySlug, getProducts } from "@/lib/products";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
+  const products = await getProducts();
   return products.map((product) => ({ slug: product.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProduct(slug);
+  const product = await getProductBySlug(slug);
   if (!product) return {};
 
   return {
@@ -32,7 +33,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
-  const product = getProduct(slug);
+  const products = await getProducts();
+  const product = products.find((item) => item.slug === slug);
   if (!product) notFound();
   const related = products.filter((item) => item.family === product.family && item.id !== product.id).slice(0, 3);
 

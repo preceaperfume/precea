@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Heart, MessageCircle, Sparkles, UserRound } from "lucide-react";
+import { Heart, Sparkles, UserRound } from "lucide-react";
+import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { getPrimaryProductImage, products } from "@/lib/products";
 import { buildGeneralOrderMessage, whatsappUrl } from "@/lib/whatsapp";
 import { useWishlistStore } from "@/store/wishlist";
@@ -27,7 +28,7 @@ export function AccountDashboard() {
           rel="noopener noreferrer"
           className="button-primary w-fit bg-[#25D366] hover:bg-[#1ebe57] dark:bg-[#25D366] dark:text-white dark:hover:bg-[#1ebe57]"
         >
-          <MessageCircle className="size-4" />
+          <WhatsAppIcon className="size-4" />
           Order on WhatsApp
         </a>
       </div>

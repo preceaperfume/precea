@@ -1,7 +1,7 @@
 import type { Product } from "@/lib/products";
 import { formatPrice, getPrimaryProductImage } from "@/lib/products";
 
-export const WHATSAPP_NUMBER = "917359657806";
+export const WHATSAPP_NUMBER = "918849181879";
 
 export function buildProductOrderMessage(product: Product) {
   const primaryImage = getPrimaryProductImage(product);

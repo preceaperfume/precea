@@ -1,7 +1,8 @@
 "use client";
 
-import { Heart, MessageCircle, ShieldCheck, Sparkles } from "lucide-react";
+import { Heart, ShieldCheck, Sparkles } from "lucide-react";
 import type { Product } from "@/lib/products";
+import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { formatPrice } from "@/lib/products";
 import { productWhatsAppUrl } from "@/lib/whatsapp";
 import { useWishlistStore } from "@/store/wishlist";
@@ -37,7 +38,7 @@ export function WhatsAppOrderPanel({ product }: { product: Product }) {
         rel="noopener noreferrer"
         className="button-primary mt-6 w-full bg-[#25D366] hover:bg-[#1ebe57] dark:bg-[#25D366] dark:text-white dark:hover:bg-[#1ebe57]"
       >
-        <MessageCircle className="size-4" />
+        <WhatsAppIcon className="size-5" />
         Order on WhatsApp
       </a>
       <div className="mt-5 grid gap-3 text-sm text-ink/70 dark:text-silk/70">

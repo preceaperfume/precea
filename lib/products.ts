@@ -31,7 +31,7 @@ export type Testimonial = {
   productSlug: string;
 };
 
-export const products: Product[] = [
+const fallbackProducts: Product[] = [
   // {
   //   id: "parfum-01",
   //   slug: "velvet-iris-absolu",
@@ -72,31 +72,31 @@ export const products: Product[] = [
     "kind": "attar",
     "bestseller": true,
     "notes": {
-      "top": [
-        "Pink Pepper",
-        "Orange Blossom",
-        "Pear"
-      ],
-      "heart": [
-        "Coffee",
-        "Jasmine",
-        "Bitter Almond",
-        "Licorice"
-      ],
-      "base": [
-        "Vanilla",
-        "Patchouli",
-        "Cedarwood",
-        "Cashmere Wood"
-      ]
+        "top": [
+            "Pink Pepper",
+            "Orange Blossom",
+            "Pear"
+        ],
+        "heart": [
+            "Coffee",
+            "Jasmine",
+            "Bitter Almond",
+            "Licorice"
+        ],
+        "base": [
+            "Vanilla",
+            "Patchouli",
+            "Cedarwood",
+            "Cashmere Wood"
+        ]
     },
     "description": "Black Opium Attar is a rich blend of warm vanilla, bold coffee, and delicate white florals, creating a sensual and captivating fragrance. Its long-lasting alcohol-free formula is perfect for everyday wear as well as evenings and special occasions.",
     "images": [
-      "https://upload.meeshosupplyassets.com/cataloging/1783141113975/ChatGPTImageMay14202605_44_02PM.png",
-      "https://upload.meeshosupplyassets.com/cataloging/1783141113975/ChatGPTImageMay14202605_44_02PM.png"
+        "https://upload.meeshosupplyassets.com/cataloging/1783141113975/ChatGPTImageMay14202605_44_02PM.png",
+        "https://upload.meeshosupplyassets.com/cataloging/1783141113975/ChatGPTImageMay14202605_44_02PM.png"
     ]
-  },
-
+},
+ 
 ];
 
 export const collections = [
@@ -147,6 +147,39 @@ export const testimonials: Testimonial[] = [
 export const DEFAULT_PRODUCT_PREVIEW_IMAGE =
   "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=1200&q=85";
 
+export const GITHUB_PRODUCTS_URL =
+  "https://raw.githubusercontent.com/preceaperfume/precea/main/data.json";
+
+function normalizeProducts(payload: unknown): Product[] {
+  if (Array.isArray(payload)) return payload as Product[];
+  if (payload && typeof payload === "object") return [payload as Product];
+  return [];
+}
+
+export async function fetchProductsFromGithub(): Promise<Product[]> {
+  try {
+    const response = await fetch(GITHUB_PRODUCTS_URL, {
+      next: { revalidate: 120 }
+    });
+    if (!response.ok) return fallbackProducts;
+
+    const payload = (await response.json()) as unknown;
+    const remoteProducts = normalizeProducts(payload);
+    return remoteProducts.length > 0 ? remoteProducts : fallbackProducts;
+  } catch {
+    return fallbackProducts;
+  }
+}
+
+export async function getProducts(): Promise<Product[]> {
+  return fetchProductsFromGithub();
+}
+
+export async function getProductBySlug(slug: string): Promise<Product | undefined> {
+  const allProducts = await getProducts();
+  return allProducts.find((product) => product.slug === slug);
+}
+
 export function getProduct(slug: string) {
   return products.find((product) => product.slug === slug);
 }
@@ -155,6 +188,17 @@ export function getPrimaryProductImage(product: Product) {
   return product.images.find(Boolean) ?? DEFAULT_PRODUCT_PREVIEW_IMAGE;
 }
 
+export async function getPerfumes(): Promise<Product[]> {
+  const allProducts = await getProducts();
+  return allProducts.filter((product) => product.kind !== "attar");
+}
+
+export async function getAttars(): Promise<Product[]> {
+  const allProducts = await getProducts();
+  return allProducts.filter((product) => product.kind === "attar");
+}
+
+export const products = fallbackProducts;
 export const perfumes = products.filter((product) => product.kind !== "attar");
 export const attars = products.filter((product) => product.kind === "attar");
 

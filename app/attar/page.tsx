@@ -1,18 +1,12 @@
 import type { Metadata } from "next";
-import { AttarFilters } from "@/components/attar-filters";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Attar",
   description: "Shop PRECEA traditional attars — concentrated perfume oils distilled with rare botanicals and aged sandalwood."
 };
 
-export default async function AttarPage({
-  searchParams
-}: {
-  searchParams: Promise<{ collection?: string }>;
-}) {
-  const params = await searchParams;
-
+export default function AttarPage() {
   return (
     <>
       <section className="border-b border-ink/10 bg-luxe-radial py-14 dark:border-white/10">
@@ -24,9 +18,11 @@ export default async function AttarPage({
           <p className="mt-5 max-w-2xl text-lg leading-8 text-ink/70 dark:text-silk/70">
             Search by mood, filter by family, and sort traditional attar compositions with precision.
           </p>
+          <Link href="/" className="button-secondary mt-8 w-fit">
+            Browse attars on home page
+          </Link>
         </div>
       </section>
-      <AttarFilters initialCollection={params.collection} />
     </>
   );
 }

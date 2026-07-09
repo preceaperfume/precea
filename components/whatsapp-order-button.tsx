@@ -1,5 +1,5 @@
-import { MessageCircle } from "lucide-react";
 import type { Product } from "@/lib/products";
+import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { buildGeneralOrderMessage, productWhatsAppUrl, whatsappUrl } from "@/lib/whatsapp";
 
 type Props = {
@@ -13,7 +13,7 @@ export function WhatsAppOrderButton({ product, className = "button-primary w-ful
 
   return (
     <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
-      <MessageCircle className="size-4" />
+      <WhatsAppIcon className="size-4" />
       {children ?? "Order on WhatsApp"}
     </a>
   );

@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { Menu, MessageCircle, Heart, X } from "lucide-react";
+import { Menu, Heart, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { whatsappUrl, buildGeneralOrderMessage } from "@/lib/whatsapp";
 import { useWishlistStore } from "@/store/wishlist";
 
@@ -15,19 +16,19 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  {
-    href: "/attar",
-    label: "Attar",
-    isActive: (pathname) =>
-      pathname === "/attar" || (pathname.startsWith("/products/") && pathname.includes("-attar"))
-  },
-  {
-    href: "/products",
-    label: "Perfumes",
-    isActive: (pathname, searchParams) =>
-      (pathname === "/products" && !searchParams.get("collection")) ||
-      (pathname.startsWith("/products/") && !pathname.includes("-attar"))
-  },
+  // {
+  //   href: "/attar",
+  //   label: "Attar",
+  //   isActive: (pathname) =>
+  //     pathname === "/attar" || (pathname.startsWith("/products/") && pathname.includes("-attar"))
+  // },
+  // {
+  //   href: "/products",
+  //   label: "Perfumes",
+  //   isActive: (pathname, searchParams) =>
+  //     (pathname === "/products" && !searchParams.get("collection")) ||
+  //     (pathname.startsWith("/products/") && !pathname.includes("-attar"))
+  // },
 
 ];
 
@@ -74,8 +75,9 @@ export function SiteHeader() {
   return (
     <header className="header-enter relative sticky top-0 z-50 border-b border-ink/10 bg-silk/80 backdrop-blur-2xl dark:border-white/10 dark:bg-noir/70">
       <div className="container-luxe flex h-[4.5rem] items-center justify-between gap-4">
-        <Link href="/" prefetch className="font-serif text-2xl font-semibold tracking-[0.18em]">
-          PRECEA
+        <Link href="/" prefetch className="inline-flex items-start font-serif text-2xl font-semibold tracking-[0.18em]">
+          <span>PRECEA</span>
+          <span className="-ml-1 -mt-0.4 text-[0.30em] leading-none tracking-normal">TM</span>
         </Link>
         <nav className="hidden items-center gap-10 text-sm font-medium tracking-[0.06em] md:flex">
           {navItems.map((item) => {
@@ -118,7 +120,7 @@ export function SiteHeader() {
             aria-label="Order on WhatsApp"
             className="grid size-10 place-items-center rounded-full bg-[#25D366] text-white shadow-sm transition hover:bg-[#1ebe57] hover:shadow-glow"
           >
-            <MessageCircle className="size-4" />
+            <WhatsAppIcon className="size-5" />
           </a>
           <button
             type="button"
@@ -174,7 +176,7 @@ export function SiteHeader() {
           className="button-primary mt-4 w-full bg-[#25D366] hover:bg-[#1ebe57] dark:bg-[#25D366] dark:text-white dark:hover:bg-[#1ebe57]"
           onClick={() => setMenuOpen(false)}
         >
-          <MessageCircle className="size-4" />
+          <WhatsAppIcon className="size-4" />
           Order on WhatsApp
         </a>
       </nav>

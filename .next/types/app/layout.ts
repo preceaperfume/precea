@@ -1,4 +1,4 @@
-// File: E:\Precea\website\app\layout.tsx
+// File: C:\Users\admin\Downloads\precea-main\app\layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

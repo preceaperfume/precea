@@ -2,13 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Heart, MessageCircle, ShoppingBag, X } from "lucide-react";
+import { Heart, ShoppingBag, X } from "lucide-react";
 import { useEffect } from "react";
-import { formatPrice, getPrimaryProductImage, products } from "@/lib/products";
+import { WhatsAppIcon } from "@/components/whatsapp-icon";
+import { formatPrice, getPrimaryProductImage, products as fallbackProducts, type Product } from "@/lib/products";
 import { buildGeneralOrderMessage, productWhatsAppUrl, whatsappUrl } from "@/lib/whatsapp";
 import { useWishlistStore } from "@/store/wishlist";
 
-export function WishlistPopup() {
+export function WishlistPopup({ products = fallbackProducts }: { products?: Product[] }) {
   const isOpen = useWishlistStore((state) => state.isOpen);
   const closeWishlist = useWishlistStore((state) => state.closeWishlist);
   const wishlist = useWishlistStore((state) => state.wishlist);
@@ -118,7 +119,7 @@ export function WishlistPopup() {
                       rel="noopener noreferrer"
                       className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-[#25D366] hover:underline"
                     >
-                      <MessageCircle className="size-3.5" />
+                      <WhatsAppIcon className="size-3.5" />
                       Order
                     </a>
                   </div>
@@ -144,7 +145,7 @@ export function WishlistPopup() {
               rel="noopener noreferrer"
               className="button-primary w-full bg-[#25D366] hover:bg-[#1ebe57] dark:bg-[#25D366] dark:text-white dark:hover:bg-[#1ebe57]"
             >
-              <MessageCircle className="size-4" />
+              <WhatsAppIcon className="size-4" />
               Order on WhatsApp
             </a>
             <Link href="/products" onClick={closeWishlist} className="button-secondary w-full">

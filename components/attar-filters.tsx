@@ -3,20 +3,26 @@
 import { Search, SlidersHorizontal } from "lucide-react";
 import { useMemo, useState } from "react";
 import { ProductCard } from "@/components/product-card";
-import { attars } from "@/lib/products";
+import { attars, type Product } from "@/lib/products";
 
 const families = ["All", "Floral", "Amber", "Woody", "Fresh"];
 const sortOptions = ["Featured", "Price low", "Price high", "Rating"];
 
-export function AttarFilters({ initialCollection }: { initialCollection?: string }) {
+export function AttarFilters({
+  initialCollection,
+  products = attars
+}: {
+  initialCollection?: string;
+  products?: Product[];
+}) {
   const [query, setQuery] = useState("");
   const [family, setFamily] = useState("All");
   const [sort, setSort] = useState("Featured");
   const [collection, setCollection] = useState(initialCollection ?? "All");
-  const collections = ["All", ...Array.from(new Set(attars.map((product) => product.collection)))];
+  const collections = ["All", ...Array.from(new Set(products.map((product) => product.collection)))];
 
   const filtered = useMemo(() => {
-    return attars
+    return products
       .filter((product) => (family === "All" ? true : product.family === family))
       .filter((product) => (collection === "All" ? true : product.collection === collection))
       .filter((product) => `${product.name} ${product.mood} ${product.family}`.toLowerCase().includes(query.toLowerCase()))
@@ -26,7 +32,7 @@ export function AttarFilters({ initialCollection }: { initialCollection?: string
         if (sort === "Rating") return b.rating - a.rating;
         return Number(b.bestseller) - Number(a.bestseller);
       });
-  }, [collection, family, query, sort]);
+  }, [collection, family, products, query, sort]);
 
   return (
     <section className="container-luxe pb-20 pt-8">

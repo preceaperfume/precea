@@ -14,6 +14,7 @@ type NewsletterFields = z.infer<typeof schema>;
 
 export function NewsletterForm() {
   const [submitted, setSubmitted] = useState(false);
+  const receiverEmail = "lisharsh2002@gmail.com";
   const {
     register,
     handleSubmit,
@@ -22,9 +23,17 @@ export function NewsletterForm() {
     resolver: zodResolver(schema)
   });
 
+  function onSubmit(values: NewsletterFields) {
+    const subject = encodeURIComponent("New newsletter signup");
+    const body = encodeURIComponent(`Please add this email to the private list:\n\n${values.email}`);
+
+    setSubmitted(true);
+    window.location.href = `mailto:${receiverEmail}?subject=${subject}&body=${body}`;
+  }
+
   return (
     <form
-      onSubmit={handleSubmit(() => setSubmitted(true))}
+      onSubmit={handleSubmit(onSubmit)}
       className="rounded-lg border border-white/10 bg-white/5 p-5">
       <p className="text-xs font-semibold uppercase tracking-[0.25em] text-champagne">Private list</p>
       <p className="mt-3 text-sm leading-6 text-silk/70">

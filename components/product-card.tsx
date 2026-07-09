@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Heart, MessageCircle, Star } from "lucide-react";
+import { Heart, Star } from "lucide-react";
 import type { Product } from "@/lib/products";
+import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { formatPrice, getPrimaryProductImage } from "@/lib/products";
 import { productWhatsAppUrl } from "@/lib/whatsapp";
 import { useWishlistStore } from "@/store/wishlist";
@@ -73,7 +74,7 @@ export function ProductCard({ product, featured = false }: { product: Product; f
           rel="noopener noreferrer"
           className="button-primary mt-4 w-full bg-[#25D366] hover:bg-[#1ebe57] dark:bg-[#25D366] dark:text-white dark:hover:bg-[#1ebe57]"
         >
-          <MessageCircle className="size-4" />
+          <WhatsAppIcon className="size-4" />
           Order on WhatsApp
         </a>
       </div>

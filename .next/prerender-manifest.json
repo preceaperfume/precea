@@ -1,11 +1,1 @@
-{
-  "version": 4,
-  "routes": {},
-  "dynamicRoutes": {},
-  "notFoundRoutes": [],
-  "preview": {
-    "previewModeId": "aac10ab6cc5f626fa49d418f0ce4d0b1",
-    "previewModeSigningKey": "293db6b598a1a55b819c9e7fbadaf23cba4c38a5a03613bfb217406a9f05755f",
-    "previewModeEncryptionKey": "53e8a3684e7778b7fac88f1f359ee7b3ded03943ac3a4c812688a833f5e3c58c"
-  }
-}
+{"version":4,"routes":{"/products/black-opium-attar-for-men-sweet-vanilla-soft-spicy-long-lasting-alcohol-free-perfume-oil-roll-on":{}},"dynamicRoutes":{"/products/[slug]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/products/[slug]","routeRegex":"^\\/products\\/([^/]+?)(?:\\/)?$","allowHeader":[]}},"notFoundRoutes":[],"preview":{"previewModeId":"9fb83bfc3c73074236b268927027f326","previewModeSigningKey":"facae6fd26aba001845d1cffa6f612f841bb68980892770c63821e2e6526fda6","previewModeEncryptionKey":"cb8dbf755470d9c09db9baa8b3d1ab9cdbfd942c7bd73f22104909e7585f3115"}}

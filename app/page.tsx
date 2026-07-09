@@ -1,19 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, MessageCircle, Sparkles, Star } from "lucide-react";
+import { ArrowRight, CheckCircle2, Sparkles, Star } from "lucide-react";
+import heroImg from "./hero-img.png";
+import { AttarFilters } from "@/components/attar-filters";
 import { ProductCard } from "@/components/product-card";
-import { collections, products, testimonials } from "@/lib/products";
+import { WhatsAppIcon } from "@/components/whatsapp-icon";
+import { collections, getAttars, getProducts, testimonials } from "@/lib/products";
 import { buildGeneralOrderMessage, whatsappUrl } from "@/lib/whatsapp";
 
-export default function Home() {
+export default async function Home() {
+  const products = await getProducts();
   const bestsellers = products.filter((product) => product.bestseller);
+  const attars = await getAttars();
 
   return (
     <>
       <section className="relative min-h-[calc(100vh-4.5rem)] overflow-hidden bg-silk dark:bg-noir">
         <div className="absolute inset-0" aria-hidden="true">
           <Image
-            src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1800&q=90"
+            src={heroImg}
             alt=""
             fill
             priority
@@ -56,7 +61,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="container-luxe py-20">
+      {/* <section className="container-luxe py-20">
         <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
             <p className="eyebrow">Best sellers</p>
@@ -71,7 +76,20 @@ export default function Home() {
             <ProductCard key={product.id} product={product} featured />
           ))}
         </div>
+      </section> */}
+
+      <section className="border-y border-ink/10 bg-luxe-radial py-14 dark:border-white/10">
+        <div className="container-luxe">
+          <p className="eyebrow">Attar library</p>
+          <h2 className="mt-3 max-w-3xl font-serif text-5xl font-semibold leading-none">
+            Find concentrated attars crafted for long-lasting wear
+          </h2>
+          <p className="mt-5 max-w-2xl text-lg leading-8 text-ink/70 dark:text-silk/70">
+            Search by mood, filter by family, and sort traditional attar compositions with precision.
+          </p>
+        </div>
       </section>
+      <AttarFilters products={attars} />
 
       <section className="bg-pearl py-20 dark:bg-white/5">
         <div className="container-luxe grid gap-12 lg:grid-cols-[minmax(0,280px)_1fr] lg:items-start lg:gap-16">
@@ -146,7 +164,7 @@ export default function Home() {
             rel="noopener noreferrer"
             className="button-primary mt-8 bg-[#25D366] hover:bg-[#1ebe57] dark:bg-[#25D366] dark:text-white dark:hover:bg-[#1ebe57]"
           >
-            <MessageCircle className="size-4" />
+            <WhatsAppIcon className="size-4" />
             Order on WhatsApp
           </a>
         </div>
