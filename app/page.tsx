@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Sparkles, Star } from "lucide-react";
+import { ArrowRight, CheckCircle2, Gift, PackageCheck, ShieldCheck, Sparkles, Star, Truck, Video } from "lucide-react";
 import heroImg from "./hero-img.png";
 import { AttarFilters } from "@/components/attar-filters";
 import { ProductCard } from "@/components/product-card";
@@ -9,9 +9,44 @@ import { collections, getAttars, getProducts, testimonials } from "@/lib/product
 import { buildGeneralOrderMessage, whatsappUrl } from "@/lib/whatsapp";
 
 export default async function Home() {
-  const products = await getProducts();
-  const bestsellers = products.filter((product) => product.bestseller);
   const attars = await getAttars();
+  const promiseCards = [
+    {
+      title: "Secure Packing",
+      copy: "Every order is packed with premium materials to ensure it reaches you safely.",
+      icon: PackageCheck,
+      image:
+        "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=900&q=85"
+    },
+    {
+      title: "Live Packing",
+      copy: "Watch your order being packed live via video call for complete transparency and trust.",
+      icon: Video,
+      image:
+        "https://images.unsplash.com/photo-1596367407372-96cb88503db6?auto=format&fit=crop&w=900&q=85"
+    },
+    {
+      title: "Free Samples",
+      copy: "Enjoy free perfume samples with every order and discover new favorites.",
+      icon: Gift,
+      image:
+        "https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&w=900&q=85"
+    },
+    {
+      title: "Fast Delivery",
+      copy: "We ensure fast and reliable delivery so you can enjoy your fragrance without the wait.",
+      icon: Truck,
+      image:
+        "https://images.unsplash.com/photo-1607082350899-7e105aa886ae?auto=format&fit=crop&w=900&q=85"
+    }
+  ];
+  const trustBadges = [
+    { label: "100% Genuine Products", icon: ShieldCheck },
+    { label: "Secure Payments", icon: CheckCircle2 },
+    { label: "Trusted by Thousands", icon: Star },
+    { label: "24/7 Customer Support", icon: Sparkles },
+    { label: "Pan India Delivery", icon: Truck }
+  ];
 
   return (
     <>
@@ -174,6 +209,54 @@ export default async function Home() {
           </div>
           <div className="relative mt-10 aspect-[4/5] overflow-hidden rounded-xl">
             <Image src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&w=1200&q=85" alt="Perfume bottle detail" fill sizes="50vw" className="object-cover" />
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#f7f2e8] py-20 dark:bg-white/5">
+        <div className="container-luxe">
+          <div className="text-center">
+            <p className="eyebrow text-[#9b7d45]">Our promise to you</p>
+            <h2 className="mt-3 font-serif text-5xl font-semibold text-ink dark:text-silk sm:text-6xl">Shop with Confidence</h2>
+          </div>
+
+          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {promiseCards.map((item) => {
+              const Icon = item.icon;
+
+              return (
+                <article
+                  key={item.title}
+                  className="overflow-hidden rounded-2xl border border-ink/10 bg-white/65 shadow-sm dark:border-white/10 dark:bg-white/10"
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image src={item.image} alt={item.title} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-cover" />
+                  </div>
+                  <div className="relative px-5 pb-6 pt-8 text-center">
+                    <div className="absolute -top-6 left-1/2 grid size-12 -translate-x-1/2 place-items-center rounded-full border border-[#e7d4ae] bg-[#fff8ea] text-[#b89149] shadow-sm dark:border-white/15 dark:bg-noir dark:text-champagne">
+                      <Icon className="size-5" />
+                    </div>
+                    <h3 className="font-serif text-3xl font-semibold">{item.title}</h3>
+                    <p className="mt-3 text-sm leading-7 text-ink/70 dark:text-silk/70">{item.copy}</p>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+
+          <div className="mt-8 rounded-full border border-[#e7d4ae] bg-[#fff8ea] px-4 py-3 dark:border-white/10 dark:bg-white/5">
+            <div className="grid gap-3 md:grid-cols-5">
+              {trustBadges.map((item) => {
+                const Icon = item.icon;
+
+                return (
+                  <div key={item.label} className="flex items-center justify-center gap-2 text-sm text-ink/80 dark:text-silk/80">
+                    <Icon className="size-4 text-[#b89149] dark:text-champagne" />
+                    <span>{item.label}</span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>

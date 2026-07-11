@@ -3,10 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Heart, Star } from "lucide-react";
+import { useMemo, useState } from "react";
 import type { Product } from "@/lib/products";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { formatPrice, getPrimaryProductImage } from "@/lib/products";
-import { productWhatsAppUrl } from "@/lib/whatsapp";
+import { buildProductOrderMessage, whatsappUrl } from "@/lib/whatsapp";
 import { useWishlistStore } from "@/store/wishlist";
 
 export function ProductCard({ product, featured = false }: { product: Product; featured?: boolean }) {
@@ -15,6 +16,20 @@ export function ProductCard({ product, featured = false }: { product: Product; f
   const wishlist = useWishlistStore((state) => state.wishlist);
   const wished = wishlist.includes(product.id);
   const previewImage = getPrimaryProductImage(product);
+  const sizeOptions = ["8ml", "12ml"];
+  const normalizeSize = (value: string) => value.replace(/\s+/g, "").toLowerCase();
+  const defaultSize = sizeOptions.find((item) => normalizeSize(product.size) === normalizeSize(item)) ?? "12ml";
+  const [selectedSize, setSelectedSize] = useState(defaultSize);
+  const orderLink = useMemo(
+    () =>
+      whatsappUrl(
+        buildProductOrderMessage({
+          ...product,
+          size: selectedSize
+        })
+      ),
+    [product, selectedSize]
+  );
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-ink/10 bg-white/55 p-4 shadow-sm backdrop-blur-xl transition duration-300 hover:-translate-y-1.5 hover:border-ink/15 hover:shadow-luxe dark:border-white/10 dark:bg-white/10 dark:hover:border-white/15">
@@ -58,10 +73,31 @@ export function ProductCard({ product, featured = false }: { product: Product; f
           </button>
         </div>
         <p className="mt-3.5 flex-1 text-sm leading-6 text-ink/70 dark:text-silk/60">{product.mood}</p>
+        {product.kind === "attar" && (
+          <div className="mt-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-smoke">Select size</p>
+            <div className="mt-2 grid grid-cols-2 gap-2">
+              {sizeOptions.map((size) => (
+                <button
+                  key={size}
+                  type="button"
+                  onClick={() => setSelectedSize(size)}
+                  className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
+                    selectedSize === size
+                      ? "border-ink bg-ink text-silk dark:border-silk dark:bg-silk dark:text-ink"
+                      : "border-ink/15 bg-white/45 text-ink/80 hover:border-ink/30 dark:border-white/15 dark:bg-white/10 dark:text-silk/85 dark:hover:border-white/30"
+                  }`}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
         <div className="mt-5 flex items-center justify-between gap-3">
           <div>
             <p className="font-semibold">{formatPrice(product.price)}</p>
-            <p className="text-xs text-smoke">{product.size}</p>
+            <p className="text-xs text-smoke">{product.kind === "attar" ? selectedSize : product.size}</p>
           </div>
           <div className="flex items-center gap-1 text-xs text-smoke">
             <Star className="size-3 fill-champagne text-champagne" />
@@ -69,7 +105,7 @@ export function ProductCard({ product, featured = false }: { product: Product; f
           </div>
         </div>
         <a
-          href={productWhatsAppUrl(product)}
+          href={orderLink}
           target="_blank"
           rel="noopener noreferrer"
           className="button-primary mt-4 w-full bg-[#25D366] hover:bg-[#1ebe57] dark:bg-[#25D366] dark:text-white dark:hover:bg-[#1ebe57]"

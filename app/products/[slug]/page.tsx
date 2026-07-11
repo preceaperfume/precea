@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Star } from "lucide-react";
+import { ProductImageSlider } from "@/components/product-image-slider";
 import { WhatsAppOrderPanel } from "@/components/whatsapp-order-panel";
 import { ProductCard } from "@/components/product-card";
 import { formatPrice, getPrimaryProductImage, getProductBySlug, getProducts } from "@/lib/products";
@@ -36,21 +37,14 @@ export default async function ProductPage({ params }: Props) {
   const products = await getProducts();
   const product = products.find((item) => item.slug === slug);
   if (!product) notFound();
+  const galleryImages = [getPrimaryProductImage(product), ...product.images];
   const related = products.filter((item) => item.family === product.family && item.id !== product.id).slice(0, 3);
 
   return (
     <>
       <section className="container-luxe grid gap-10 py-10 lg:grid-cols-[1.05fr_.95fr]">
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-lg sm:col-span-2">
-            <Image src={getPrimaryProductImage(product)} alt={`${product.name} bottle`} fill priority sizes="(max-width: 1024px) 100vw, 55vw" className="object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/40 to-transparent" />
-          </div>
-          {product.images.slice(1).map((image) => (
-            <div key={image} className="relative aspect-square overflow-hidden rounded-lg">
-              <Image src={image} alt={`${product.name} detail`} fill sizes="30vw" className="object-cover" />
-            </div>
-          ))}
+          <ProductImageSlider productName={product.name} images={galleryImages} />
           <div className="glass rounded-lg p-5">
             <p className="eyebrow">Sillage</p>
             <p className="mt-3 font-serif text-3xl font-semibold">{product.intensity}</p>
