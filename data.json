@@ -1,41 +1,121 @@
-{
-    "id": "attar-01",
-    "slug": "black-opium-attar-for-men-sweet-vanilla-soft-spicy-long-lasting-alcohol-free-perfume-oil-roll-on",
-    "name": "Black Opium Attarss",
-    "collection": "Exotic Attars",
-    "price": 349,
-    "size": "12 ml",
-    "mood": "Damask rose, honeyed petals, warm sandalwood oil",
-    "intensity": "Strong",
-    "family": "Oriental Vanilla",
-    "rating": 4.9,
-    "reviews": 156,
-    "kind": "attar",
-    "bestseller": true,
-    "notes": {
-        "top": [
-            "Pink Pepper",
-            "Orange Blossom",
-            "Pear"
-        ],
-        "heart": [
-            "Coffee",
-            "Jasmine",
-            "Bitter Almond",
-            "Licorice"
-        ],
-        "base": [
-            "Vanilla",
-            "Patchouli",
-            "Cedarwood",
-            "Cashmere Wood"
+[
+    {
+        "id": "attar-01",
+        "slug": "black-opium-attar-for-men-sweet-vanilla-soft-spicy-long-lasting-alcohol-free-perfume-oil-roll-on",
+        "name": "Black Opium Attarss",
+        "collection": "Exotic Attars",
+        "price": 349,
+        "size": "12 ml",
+        "mood": "Damask rose, honeyed petals, warm sandalwood oil",
+        "intensity": "Strong",
+        "family": "Oriental Vanilla",
+        "rating": 4.9,
+        "reviews": 156,
+        "kind": "attar",
+        "bestseller": true,
+        "notes": {
+            "top": [
+                "Pink Pepper",
+                "Orange Blossom",
+                "Pear"
+            ],
+            "heart": [
+                "Coffee",
+                "Jasmine",
+                "Bitter Almond",
+                "Licorice"
+            ],
+            "base": [
+                "Vanilla",
+                "Patchouli",
+                "Cedarwood",
+                "Cashmere Wood"
+            ]
+        },
+        "description": "Black Opium Attar is a rich blend of warm vanilla, bold coffee, and delicate white florals, creating a sensual and captivating fragrance. Its long-lasting alcohol-free formula is perfect for everyday wear as well as evenings and special occasions.",
+        "images": [
+            "https://upload.meeshosupplyassets.com/cataloging/1783141113975/ChatGPTImageMay14202605_44_02PM.png",
+            "https://upload.meeshosupplyassets.com/cataloging/1783747734418/ChatGPTImageJun19202609_13_48AM.png",
+            "https://upload.meeshosupplyassets.com/cataloging/1783747734877/ChatGPTImageJun19202609_15_43AM.png",
+            "https://upload.meeshosupplyassets.com/cataloging/1783747734905/ChatGPTImageJun19202609_28_18AM.png"
         ]
     },
-    "description": "Black Opium Attar is a rich blend of warm vanilla, bold coffee, and delicate white florals, creating a sensual and captivating fragrance. Its long-lasting alcohol-free formula is perfect for everyday wear as well as evenings and special occasions.",
-    "images": [
-        "https://upload.meeshosupplyassets.com/cataloging/1783141113975/ChatGPTImageMay14202605_44_02PM.png",
-        "https://upload.meeshosupplyassets.com/cataloging/1783747734418/ChatGPTImageJun19202609_13_48AM.png",
-        "https://upload.meeshosupplyassets.com/cataloging/1783747734877/ChatGPTImageJun19202609_15_43AM.png",
-        "https://upload.meeshosupplyassets.com/cataloging/1783747734905/ChatGPTImageJun19202609_28_18AM.png"
-    ]
-}
+    {
+        "id": "attar-02",
+        "slug": "cool vibe-attar-for-men-woman-cool-water-inspired-attar",
+        "name": "cool vibe attar",
+        "collection": "Exotic Attars",
+        "price": 349,
+        "size": "12 ml",
+        "mood": "A long-lasting fresh aquatic perfume oil with citrus, lavender, and woody notes, perfect for everyday wear.",
+        "intensity": "Strong",
+        "family": "fresh aquatic",
+        "rating": 4.9,
+        "reviews": 156,
+        "kind": "attar",
+        "bestseller": true,
+        "notes": {
+            "top": [
+                "Mint",
+                "Sea Notes",
+                "Lavender",
+                "Green Notes",
+                "Rosemary",
+                "Coriander"
+            ],
+            "heart": [
+                "Geranium",
+                "Jasmine",
+                "Neroli",
+                "Licorice"
+            ],
+            "base": [
+                "Cedarwood",
+                "Musk",
+                "Cedarwood",
+                "Amber"
+            ]
+        },
+        "description": "Experience the refreshing aroma of Cool vibe Roll-On Attar. A long-lasting fresh aquatic perfume oil with citrus, lavender, and woody notes, perfect for everyday wear.",
+        "images": []
+    },
+    {
+        "id": "attar-03",
+        "slug": "cool vibe-attar-for-men-woman-cool-water-inspired-attar",
+        "name": "cool vibe attar",
+        "collection": "Exotic Attars",
+        "price": 349,
+        "size": "12 ml",
+        "mood": "A long-lasting fresh aquatic perfume oil with citrus, lavender, and woody notes, perfect for everyday wear.",
+        "intensity": "Strong",
+        "family": "fresh aquatic",
+        "rating": 4.9,
+        "reviews": 156,
+        "kind": "attar",
+        "bestseller": true,
+        "notes": {
+            "top": [
+                "Mint",
+                "Sea Notes",
+                "Lavender",
+                "Green Notes",
+                "Rosemary",
+                "Coriander"
+            ],
+            "heart": [
+                "Geranium",
+                "Jasmine",
+                "Neroli",
+                "Licorice"
+            ],
+            "base": [
+                "Cedarwood",
+                "Musk",
+                "Cedarwood",
+                "Amber"
+            ]
+        },
+        "description": "Experience the refreshing aroma of Cool vibe Roll-On Attar. A long-lasting fresh aquatic perfume oil with citrus, lavender, and woody notes, perfect for everyday wear.",
+        "images": []
+    }
+]
