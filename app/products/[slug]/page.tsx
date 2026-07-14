@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Star } from "lucide-react";
-import { ProductImageSlider } from "@/components/product-image-slider";
-import { WhatsAppOrderPanel } from "@/components/whatsapp-order-panel";
 import { ProductCard } from "@/components/product-card";
-import { formatPrice, getPrimaryProductImage, getProductBySlug, getProducts } from "@/lib/products";
+import { ProductDetailView } from "@/components/product-detail-view";
+import { getPrimaryProductImage, getProductBySlug, getProducts } from "@/lib/products";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -37,42 +35,11 @@ export default async function ProductPage({ params }: Props) {
   const products = await getProducts();
   const product = products.find((item) => item.slug === slug);
   if (!product) notFound();
-  const galleryImages = [getPrimaryProductImage(product), ...product.images];
   const related = products.filter((item) => item.family === product.family && item.id !== product.id).slice(0, 3);
 
   return (
     <>
-      <section className="container-luxe grid gap-10 py-10 lg:grid-cols-[1.05fr_.95fr]">
-        <div className="grid gap-4 sm:grid-cols-2">
-          <ProductImageSlider productName={product.name} images={galleryImages} />
-          <div className="glass rounded-lg p-5">
-            <p className="eyebrow">Sillage</p>
-            <p className="mt-3 font-serif text-3xl font-semibold">{product.intensity}</p>
-            <p className="mt-2 text-sm text-ink/60 dark:text-silk/60">{product.family} fragrance family</p>
-          </div>
-        </div>
-        <div className="lg:sticky lg:top-24 lg:h-fit">
-          <p className="eyebrow">{product.kind === "attar" ? "Sacred attar" : product.collection}</p>
-          <h1 className="mt-3 font-serif text-6xl font-semibold leading-none">{product.name}</h1>
-          <div className="mt-4 flex items-center gap-3 text-sm text-smoke">
-            <span className="flex items-center gap-1"><Star className="size-4 fill-champagne text-champagne" /> {product.rating}</span>
-            <span>{product.reviews} reviews</span>
-            <span>{formatPrice(product.price)}</span>
-          </div>
-          <p className="mt-6 text-lg leading-8 text-ink/70 dark:text-silk/70">{product.description}</p>
-          <div className="mt-8 grid gap-3">
-            {Object.entries(product.notes).map(([stage, notes]) => (
-              <div key={stage} className="rounded-lg border border-ink/10 bg-white/40 p-4 dark:border-white/10 dark:bg-white/10">
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-smoke">{stage} notes</p>
-                <p className="mt-2 font-serif text-2xl">{notes.join(" / ")}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-6">
-            <WhatsAppOrderPanel product={product} />
-          </div>
-        </div>
-      </section>
+      <ProductDetailView product={product} />
 
       <section className="container-luxe pb-16">
         <div className="grid gap-4 md:grid-cols-3">

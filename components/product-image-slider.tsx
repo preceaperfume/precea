@@ -13,19 +13,23 @@ export function ProductImageSlider({ productName, images }: ProductImageSliderPr
   const gallery = useMemo(() => Array.from(new Set(images.filter(Boolean))), [images]);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  if (gallery.length === 0) return null;
-
-  const canSlide = gallery.length > 1;
+  useEffect(() => {
+    setActiveIndex(0);
+  }, [gallery]);
 
   useEffect(() => {
-    if (!canSlide) return;
+    if (gallery.length <= 1) return;
 
     const timer = window.setInterval(() => {
       setActiveIndex((current) => (current === gallery.length - 1 ? 0 : current + 1));
     }, 5000);
 
     return () => window.clearInterval(timer);
-  }, [canSlide, gallery.length]);
+  }, [gallery]);
+
+  if (gallery.length === 0) return null;
+
+  const canSlide = gallery.length > 1;
 
   const goToPrev = () => {
     setActiveIndex((current) => (current === 0 ? gallery.length - 1 : current - 1));

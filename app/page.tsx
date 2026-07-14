@@ -16,28 +16,28 @@ export default async function Home() {
       copy: "Every order is packed with premium materials to ensure it reaches you safely.",
       icon: PackageCheck,
       image:
-        "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=900&q=85"
+        "https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?auto=format&fit=crop&w=900&q=85"
     },
     {
       title: "Live Packing",
       copy: "Watch your order being packed live via video call for complete transparency and trust.",
       icon: Video,
       image:
-        "https://images.unsplash.com/photo-1596367407372-96cb88503db6?auto=format&fit=crop&w=900&q=85"
+        "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=900&q=85"
     },
     {
       title: "Free Samples",
       copy: "Enjoy free perfume samples with every order and discover new favorites.",
       icon: Gift,
       image:
-        "https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&w=900&q=85"
+        "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=900&q=85"
     },
     {
       title: "Fast Delivery",
       copy: "We ensure fast and reliable delivery so you can enjoy your fragrance without the wait.",
       icon: Truck,
       image:
-        "https://images.unsplash.com/photo-1607082350899-7e105aa886ae?auto=format&fit=crop&w=900&q=85"
+        "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=900&q=85"
     }
   ];
   const trustBadges = [
@@ -77,7 +77,7 @@ export default async function Home() {
               Cinematic extrait fragrances crafted with rare materials, modern restraint, and the quiet gravity of true luxury.
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <Link href="/products" className="button-primary">
+              <Link href="#collection" className="button-primary">
                 Shop the collection <ArrowRight className="size-4" />
               </Link>
               <Link href="/products/velvet-iris-absolu" className="button-secondary">
@@ -113,7 +113,7 @@ export default async function Home() {
         </div>
       </section> */}
 
-      <section className="border-y border-ink/10 bg-luxe-radial py-14 dark:border-white/10">
+      <section id="collection" className="scroll-mt-24 border-y border-ink/10 bg-luxe-radial py-14 dark:border-white/10">
         <div className="container-luxe">
           <p className="eyebrow">Attar library</p>
           <h2 className="mt-3 max-w-3xl font-serif text-5xl font-semibold leading-none">

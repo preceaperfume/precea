@@ -7,7 +7,7 @@ export function buildProductOrderMessage(product: Product) {
   const primaryImage = getPrimaryProductImage(product);
 
   return [
-    "Hello PRECEA, I would like to order:",
+    "Hello PRECEA™, I would like to order:",
     "",
     `*${product.name}*`,
     `Type: ${product.kind === "attar" ? "Attar" : "Perfume"}`,
@@ -21,7 +21,7 @@ export function buildProductOrderMessage(product: Product) {
 }
 
 export function buildGeneralOrderMessage() {
-  return "Hello PRECEA, I would like to place a fragrance order. Please share your current collection and delivery details.";
+  return "Hello PRECEA™, I would like to place a fragrance order. Please share your current collection and delivery details.";
 }
 
 export function whatsappUrl(message: string) {
