@@ -45,7 +45,7 @@ body {
   }
 
   .glass {
-    @apply border border-ink/10 bg-white/55 shadow-luxe backdrop-blur-2xl dark:border-white/10 dark:bg-white/10;
+    @apply border border-champagne/35 bg-silk/80 shadow-luxe backdrop-blur-2xl dark:border-white/10 dark:bg-white/10;
   }
 
   .eyebrow {
@@ -57,47 +57,116 @@ body {
   }
 
   .button-secondary {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-ink/15 bg-white/35 px-7 py-3 text-sm font-semibold tracking-[0.02em] text-ink backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:border-champagne hover:bg-white/65 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-champagne focus:ring-offset-2 dark:border-white/15 dark:bg-white/10 dark:text-silk dark:hover:bg-white/15 dark:focus:ring-offset-noir;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-ink/15 bg-silk/60 px-7 py-3 text-sm font-semibold tracking-[0.02em] text-ink backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:border-champagne hover:bg-pearl/80 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-champagne focus:ring-offset-2 dark:border-white/15 dark:bg-white/10 dark:text-silk dark:hover:bg-white/15 dark:focus:ring-offset-noir;
   }
 
   .field {
-    @apply h-12 w-full rounded-full border border-ink/10 bg-white/70 px-5 text-sm outline-none transition placeholder:text-smoke focus:border-champagne focus:ring-4 focus:ring-champagne/20 dark:border-white/10 dark:bg-white/10 dark:text-silk;
+    @apply h-12 w-full rounded-full border border-champagne/40 bg-silk/90 px-5 text-sm outline-none transition placeholder:text-smoke focus:border-champagne focus:ring-4 focus:ring-champagne/20 dark:border-white/10 dark:bg-white/10 dark:text-silk;
   }
 
   .hero-bg-image {
-    @apply object-cover object-[58%_center] scale-105;
+    @apply object-cover object-[50%_42%] scale-110 sm:scale-105 sm:object-[55%_center] lg:object-[58%_center];
   }
 
   .hero-bg-overlay {
     background:
       linear-gradient(
-        to right,
-        rgba(251, 247, 239, 0.97) 0%,
-        rgba(251, 247, 239, 0.9) 24%,
-        rgba(251, 247, 239, 0.55) 48%,
-        rgba(251, 247, 239, 0.12) 68%,
-        transparent 82%
+        to bottom,
+        rgba(251, 247, 239, 0.55) 0%,
+        rgba(251, 247, 239, 0.28) 42%,
+        rgba(251, 247, 239, 0.62) 100%
       ),
-      linear-gradient(to top, rgba(251, 247, 239, 0.35) 0%, transparent 28%),
-      radial-gradient(ellipse 90% 70% at 72% 42%, transparent 35%, rgba(251, 247, 239, 0.18) 100%);
+      linear-gradient(
+        to right,
+        rgba(251, 247, 239, 0.88) 0%,
+        rgba(251, 247, 239, 0.55) 42%,
+        rgba(251, 247, 239, 0.22) 68%,
+        transparent 100%
+      );
+  }
+
+  @media (min-width: 640px) {
+    .hero-bg-overlay {
+      background:
+        linear-gradient(
+          to right,
+          rgba(251, 247, 239, 0.97) 0%,
+          rgba(251, 247, 239, 0.9) 24%,
+          rgba(251, 247, 239, 0.55) 48%,
+          rgba(251, 247, 239, 0.12) 68%,
+          transparent 82%
+        ),
+        linear-gradient(to top, rgba(251, 247, 239, 0.35) 0%, transparent 28%),
+        radial-gradient(ellipse 90% 70% at 72% 42%, transparent 35%, rgba(251, 247, 239, 0.18) 100%);
+    }
   }
 
   .dark .hero-bg-overlay {
     background:
       linear-gradient(
-        to right,
-        rgba(6, 6, 6, 0.96) 0%,
-        rgba(6, 6, 6, 0.88) 24%,
-        rgba(6, 6, 6, 0.52) 48%,
-        rgba(6, 6, 6, 0.14) 68%,
-        transparent 82%
+        to bottom,
+        rgba(6, 6, 6, 0.62) 0%,
+        rgba(6, 6, 6, 0.32) 42%,
+        rgba(6, 6, 6, 0.68) 100%
       ),
-      linear-gradient(to top, rgba(6, 6, 6, 0.45) 0%, transparent 28%),
-      radial-gradient(ellipse 90% 70% at 72% 42%, transparent 35%, rgba(6, 6, 6, 0.22) 100%);
+      linear-gradient(
+        to right,
+        rgba(6, 6, 6, 0.86) 0%,
+        rgba(6, 6, 6, 0.5) 42%,
+        rgba(6, 6, 6, 0.2) 68%,
+        transparent 100%
+      );
+  }
+
+  @media (min-width: 640px) {
+    .dark .hero-bg-overlay {
+      background:
+        linear-gradient(
+          to right,
+          rgba(6, 6, 6, 0.96) 0%,
+          rgba(6, 6, 6, 0.88) 24%,
+          rgba(6, 6, 6, 0.52) 48%,
+          rgba(6, 6, 6, 0.14) 68%,
+          transparent 82%
+        ),
+        linear-gradient(to top, rgba(6, 6, 6, 0.45) 0%, transparent 28%),
+        radial-gradient(ellipse 90% 70% at 72% 42%, transparent 35%, rgba(6, 6, 6, 0.22) 100%);
+    }
   }
 
   .header-enter {
     animation: header-enter 0.35s ease-out both;
+  }
+
+  .bg-signature-atelier {
+    position: relative;
+    isolation: isolate;
+    background-color: #f0e6d4;
+    background-image: linear-gradient(180deg, #f5ead8 0%, #efe3cf 48%, #e8d9c0 100%);
+  }
+
+  .bg-signature-atelier::before,
+  .bg-signature-atelier::after {
+    content: none;
+  }
+
+  .dark .bg-signature-atelier {
+    background-color: #141210;
+    background-image: linear-gradient(180deg, #1a1714 0%, #12100e 50%, #0e0c0a 100%);
+  }
+
+  .whatsapp-float-ripple,
+  .whatsapp-float-ripple-delay {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    border: 2px solid rgba(37, 211, 102, 0.7);
+    background: rgba(37, 211, 102, 0.16);
+    animation: whatsapp-ripple 2.4s cubic-bezier(0.15, 0.6, 0.35, 1) infinite;
+  }
+
+  .whatsapp-float-ripple-delay {
+    animation-delay: 1.2s;
   }
 }
 
@@ -110,5 +179,22 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes whatsapp-ripple {
+  0% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+
+  70% {
+    transform: scale(1.85);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1.85);
+    opacity: 0;
   }
 }

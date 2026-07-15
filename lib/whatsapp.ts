@@ -24,6 +24,18 @@ export function buildGeneralOrderMessage() {
   return "Hello PRECEA™, I would like to place a fragrance order. Please share your current collection and delivery details.";
 }
 
+export function buildSignatureOrderMessage() {
+  return [
+    "Hello PRECEA™, I would like to order:",
+    "",
+    "*Signature*",
+    "Type: Extrait de Parfum",
+    "Collection: PRECEA Signature",
+    "",
+    "Please confirm availability, sizes, price, and delivery details."
+  ].join("\n");
+}
+
 export function whatsappUrl(message: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }

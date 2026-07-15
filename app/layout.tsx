@@ -4,6 +4,7 @@ import "./globals.css";
 import favicon from "./favicon.png";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader, SiteHeaderFallback } from "@/components/site-header";
+import { FloatingWhatsApp } from "@/components/floating-whatsapp";
 import { WishlistPopup } from "@/components/wishlist-popup";
 import { getProducts } from "@/lib/products";
 
@@ -46,7 +47,8 @@ export default async function RootLayout({
         <Suspense fallback={<SiteHeaderFallback />}>
           <SiteHeader />
         </Suspense>
-        <main>{children}</main>
+        <main className="bg-transparent">{children}</main>
+        <FloatingWhatsApp />
         <WishlistPopup products={products} />
         <SiteFooter />
       </body>

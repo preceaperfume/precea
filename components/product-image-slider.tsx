@@ -40,8 +40,8 @@ export function ProductImageSlider({ productName, images }: ProductImageSliderPr
   };
 
   return (
-    <div className="sm:col-span-2">
-      <div className="group relative aspect-[4/5] overflow-hidden rounded-lg">
+    <div className="mx-auto w-[78%] max-w-[17.5rem] sm:w-[88%] sm:max-w-[22rem] lg:w-full lg:max-w-none">
+      <div className="group relative aspect-[3/4] overflow-hidden rounded-lg sm:aspect-[4/5]">
         {gallery.map((image, index) => (
           <Image
             key={`${image}-${index}`}
@@ -49,7 +49,7 @@ export function ProductImageSlider({ productName, images }: ProductImageSliderPr
             alt={`${productName} bottle`}
             fill
             priority={index === 0}
-            sizes="(max-width: 1024px) 100vw, 55vw"
+            sizes="(max-width: 640px) 78vw, (max-width: 1024px) 50vw, 40vw"
             className={`object-cover will-change-transform transition-[opacity,transform] duration-1000 ease-in-out ${
               index === activeIndex ? "scale-100 opacity-100" : "scale-[1.03] opacity-0"
             }`}
@@ -63,23 +63,21 @@ export function ProductImageSlider({ productName, images }: ProductImageSliderPr
               type="button"
               aria-label="Previous image"
               onClick={goToPrev}
-              className="absolute left-3 top-1/2 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-black/35 text-white opacity-90 backdrop-blur transition-all duration-300 hover:scale-105 hover:bg-black/55 hover:opacity-100"
+              className="absolute left-2 top-1/2 grid size-8 -translate-y-1/2 place-items-center rounded-full bg-black/35 text-white opacity-90 backdrop-blur transition-all duration-300 hover:scale-105 hover:bg-black/55 hover:opacity-100 sm:left-3 sm:size-10"
             >
-              <ChevronLeft className="size-5" />
+              <ChevronLeft className="size-4 sm:size-5" />
             </button>
             <button
               type="button"
               aria-label="Next image"
               onClick={goToNext}
-              className="absolute right-3 top-1/2 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-black/35 text-white opacity-90 backdrop-blur transition-all duration-300 hover:scale-105 hover:bg-black/55 hover:opacity-100"
+              className="absolute right-2 top-1/2 grid size-8 -translate-y-1/2 place-items-center rounded-full bg-black/35 text-white opacity-90 backdrop-blur transition-all duration-300 hover:scale-105 hover:bg-black/55 hover:opacity-100 sm:right-3 sm:size-10"
             >
-              <ChevronRight className="size-5" />
+              <ChevronRight className="size-4 sm:size-5" />
             </button>
           </>
         )}
       </div>
-
-      
     </div>
   );
 }

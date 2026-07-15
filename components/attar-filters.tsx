@@ -36,7 +36,7 @@ export function AttarFilters({
 
   return (
     <section className="container-luxe pb-20 pt-8">
-      <div className="glass rounded-lg p-4">
+      <div className="rounded-2xl border border-champagne/40 bg-pearl/70 p-4 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-white/10">
         <div className="grid gap-3 md:grid-cols-[1.2fr_.8fr_.8fr]">
           <label className="relative block">
             <Search className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-smoke" />
@@ -73,7 +73,7 @@ export function AttarFilters({
               className={`rounded-full border px-4 py-2 text-sm transition ${
                 family === item
                   ? "border-ink bg-ink text-silk dark:border-silk dark:bg-silk dark:text-ink"
-                  : "border-ink/10 bg-white/40 dark:border-white/10 dark:bg-white/10"
+                  : "border-champagne/50 bg-silk/80 text-ink/80 hover:border-champagne hover:bg-pearl dark:border-white/10 dark:bg-white/10 dark:text-silk/85"
               }`}
             >
               {item}

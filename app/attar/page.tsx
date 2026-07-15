@@ -11,7 +11,7 @@ export default function AttarPage() {
     <>
       <section className="border-b border-ink/10 bg-luxe-radial py-14 dark:border-white/10">
         <div className="container-luxe">
-          <p className="eyebrow">Attar library</p>
+          <p className="eyebrow">ATTAR COLLECTION</p>
           <h1 className="mt-3 max-w-3xl font-serif text-6xl font-semibold leading-none">
             Find concentrated attars crafted for long-lasting wear
           </h1>

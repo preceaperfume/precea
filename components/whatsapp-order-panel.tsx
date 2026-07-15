@@ -27,13 +27,16 @@ export function WhatsAppOrderPanel({ product, selectedSize, onSizeChange }: What
   const orderLink = useMemo(() => productWhatsAppUrl(selectedProduct), [selectedProduct]);
 
   return (
-    <div className="glass rounded-lg p-5">
-      <div className="flex items-center justify-between gap-4">
-        <div>
-          <p className="text-sm text-smoke">
-            {selectedProduct.size} {product.kind === "attar" ? "concentrated attar oil" : "extrait de parfum"}
+    <div className="glass rounded-lg p-4 sm:p-5">
+      <div className="flex items-start justify-between gap-3 sm:items-center sm:gap-4">
+        <div className="min-w-0">
+          <p className="text-sm leading-5 text-smoke">
+            {selectedProduct.size}{" "}
+            <span className="block sm:inline">
+              {product.kind === "attar" ? "concentrated attar oil" : "extrait de parfum"}
+            </span>
           </p>
-          <p className="font-serif text-4xl font-semibold">{formatPrice(selectedProduct.price)}</p>
+          <p className="mt-1 font-serif text-3xl font-semibold sm:text-4xl">{formatPrice(selectedProduct.price)}</p>
         </div>
         <button
           type="button"
@@ -42,7 +45,7 @@ export function WhatsAppOrderPanel({ product, selectedSize, onSizeChange }: What
             if (!wished) openWishlist();
           }}
           aria-label={wished ? "Remove from wishlist" : "Add to wishlist"}
-          className="grid size-12 place-items-center rounded-full border border-ink/10 dark:border-white/10"
+          className="grid size-11 shrink-0 place-items-center rounded-full border border-ink/10 sm:size-12 dark:border-white/10"
         >
           <Heart className={`size-5 ${wished ? "fill-rosewood text-rosewood dark:fill-champagne dark:text-champagne" : ""}`} />
         </button>
@@ -57,7 +60,7 @@ export function WhatsAppOrderPanel({ product, selectedSize, onSizeChange }: What
                 key={option.size}
                 type="button"
                 onClick={() => setActiveSize(option.size)}
-                className={`rounded-full border px-3 py-2 text-sm font-semibold transition ${
+                className={`rounded-full border px-2.5 py-2 text-xs font-semibold transition sm:px-3 sm:text-sm ${
                   activeSize === option.size
                     ? "border-ink bg-ink text-silk dark:border-silk dark:bg-silk dark:text-ink"
                     : "border-ink/15 bg-white/45 text-ink/80 hover:border-ink/30 dark:border-white/15 dark:bg-white/10 dark:text-silk/85 dark:hover:border-white/30"
@@ -80,12 +83,12 @@ export function WhatsAppOrderPanel({ product, selectedSize, onSizeChange }: What
         Order on WhatsApp
       </a>
       <div className="mt-5 grid gap-3 text-sm text-ink/70 dark:text-silk/70">
-        <p className="flex items-center gap-2">
-          <ShieldCheck className="size-4 text-moss dark:text-champagne" />
+        <p className="flex items-start gap-2 sm:items-center">
+          <ShieldCheck className="mt-0.5 size-4 shrink-0 text-moss sm:mt-0 dark:text-champagne" />
           Complimentary insured delivery and private wrapping
         </p>
-        <p className="flex items-center gap-2">
-          <Sparkles className="size-4 text-moss dark:text-champagne" />
+        <p className="flex items-start gap-2 sm:items-center">
+          <Sparkles className="mt-0.5 size-4 shrink-0 text-moss sm:mt-0 dark:text-champagne" />
           Includes two discovery samples selected by the atelier
         </p>
       </div>

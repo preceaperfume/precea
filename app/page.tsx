@@ -2,11 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Gift, PackageCheck, ShieldCheck, Sparkles, Star, Truck, Video } from "lucide-react";
 import heroImg from "./hero-img.png";
+import securePackingImg from "./securepacking.png";
+import Livepacking from "./livepacking.png";
+import freeSamplesImg from "./freesamples.png";
+import fastDeliveryImg from "./fastdelivery.png";
 import { AttarFilters } from "@/components/attar-filters";
 import { ProductCard } from "@/components/product-card";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
-import { collections, getAttars, getProducts, testimonials } from "@/lib/products";
-import { buildGeneralOrderMessage, whatsappUrl } from "@/lib/whatsapp";
+import { collections, getAttars, testimonials } from "@/lib/products";
+import { buildGeneralOrderMessage, buildSignatureOrderMessage, whatsappUrl } from "@/lib/whatsapp";
 
 export default async function Home() {
   const attars = await getAttars();
@@ -15,29 +19,25 @@ export default async function Home() {
       title: "Secure Packing",
       copy: "Every order is packed with premium materials to ensure it reaches you safely.",
       icon: PackageCheck,
-      image:
-        "https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?auto=format&fit=crop&w=900&q=85"
+      image: securePackingImg
     },
     {
       title: "Live Packing",
       copy: "Watch your order being packed live via video call for complete transparency and trust.",
       icon: Video,
-      image:
-        "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=900&q=85"
+      image: Livepacking
     },
     {
       title: "Free Samples",
       copy: "Enjoy free perfume samples with every order and discover new favorites.",
       icon: Gift,
-      image:
-        "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=900&q=85"
+      image: freeSamplesImg
     },
     {
       title: "Fast Delivery",
       copy: "We ensure fast and reliable delivery so you can enjoy your fragrance without the wait.",
       icon: Truck,
-      image:
-        "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=900&q=85"
+      image: fastDeliveryImg
     }
   ];
   const trustBadges = [
@@ -67,28 +67,28 @@ export default async function Home() {
           <div className="absolute inset-0 bg-luxe-radial opacity-70" />
         </div>
 
-        <div className="container-luxe relative z-[2] flex min-h-[calc(100vh-4.5rem)] items-center py-20">
-          <div className="max-w-2xl">
+        <div className="container-luxe relative z-[2] flex min-h-[calc(100vh-4.5rem)] items-center py-14 sm:py-16 lg:py-20">
+          <div className="w-full max-w-[22rem] sm:max-w-xl lg:max-w-2xl">
             <p className="eyebrow">Maison de parfum</p>
-            <h1 className="mt-6 font-serif text-6xl font-semibold leading-[0.9] text-ink dark:text-silk sm:text-7xl lg:text-8xl">
-              PRECEA
+            <h1 className="mt-4 break-words font-serif text-[2.35rem] font-semibold leading-[1.05] tracking-tight text-ink dark:text-silk sm:mt-6 sm:text-5xl sm:leading-[1.02] md:text-6xl lg:text-7xl xl:text-8xl xl:leading-[0.95]">
+              Luxury Attars Crafted to Perfection
             </h1>
-            <p className="mt-7 max-w-xl text-lg leading-8 text-ink/75 dark:text-silk/75">
-              Cinematic extrait fragrances crafted with rare materials, modern restraint, and the quiet gravity of true luxury.
+            <p className="mt-5 max-w-xl text-base leading-7 text-ink/75 dark:text-silk/75 sm:mt-7 sm:text-lg sm:leading-8">
+              Experience timeless attars blended from the finest natural ingredients. Rich, long-lasting fragrances that reflect elegance, tradition, and modern luxury.
             </p>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <Link href="#collection" className="button-primary">
-                Shop the collection <ArrowRight className="size-4" />
+            <div className="mt-8 flex w-full flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap">
+              <Link href="#collection" className="button-primary w-full sm:w-auto">
+                Discover Attars <ArrowRight className="size-4" />
               </Link>
-              <Link href="/products/velvet-iris-absolu" className="button-secondary">
-                Discover Velvet Iris
+              <Link href="#collection" className="button-secondary w-full sm:w-auto">
+                View Signature Collection
               </Link>
             </div>
-            <div className="mt-12 grid max-w-xl grid-cols-3 gap-4 text-sm">
-              {["Extrait strength", "Rare naturals", "Private wrapping"].map((item) => (
-                <div key={item} className="glass rounded-xl p-4">
-                  <CheckCircle2 className="mb-2 size-4 text-moss dark:text-champagne" />
-                  {item}
+            <div className="mt-8 grid grid-cols-1 gap-3 text-sm sm:mt-10 sm:grid-cols-3 sm:gap-4">
+              {["Pure Attar", "Luxury Ingredients", "Long-Lasting Performance"].map((item) => (
+                <div key={item} className="glass flex items-start gap-2 rounded-xl p-3.5 sm:block sm:p-4">
+                  <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-moss sm:mb-2 sm:mt-0 dark:text-champagne" />
+                  <span className="leading-snug">{item}</span>
                 </div>
               ))}
             </div>
@@ -115,16 +115,75 @@ export default async function Home() {
 
       <section id="collection" className="scroll-mt-24 border-y border-ink/10 bg-luxe-radial py-14 dark:border-white/10">
         <div className="container-luxe">
-          <p className="eyebrow">Attar library</p>
+          <p className="eyebrow">ATTAR COLLECTION</p>
           <h2 className="mt-3 max-w-3xl font-serif text-5xl font-semibold leading-none">
-            Find concentrated attars crafted for long-lasting wear
+          Discover Luxury Attars Crafted for Every Occasion
           </h2>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-ink/70 dark:text-silk/70">
-            Search by mood, filter by family, and sort traditional attar compositions with precision.
+          Explore PRECEA's exclusive collection of premium alcohol-free attars, handcrafted with natural oils and timeless fragrance notes. Find the perfect long-lasting scent for daily wear, celebrations, and special moments.
           </p>
         </div>
       </section>
       <AttarFilters products={attars} />
+
+      <section id="signature" className="bg-signature-atelier scroll-mt-24 overflow-hidden py-16 sm:py-20">
+        <div className="container-luxe">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="eyebrow">PRECEA PERFUME</p>
+            <h2 className="mt-3 font-serif text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
+              Our Signature Perfume Spray
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-ink/70 dark:text-silk/70 sm:text-lg sm:leading-8">
+              Experience PRECEA™ Signature, a luxury perfume spray crafted with premium fragrance oils and refined ingredients. Designed for exceptional longevity, elegance, and everyday sophistication.
+            </p>
+            
+          </div>
+
+          <div className="mx-auto mt-10 max-w-5xl sm:mt-12">
+            <div className="group relative overflow-hidden rounded-2xl border border-ink/10 shadow-luxe dark:border-white/10">
+              <div className="relative aspect-[4/5] sm:aspect-[16/10] lg:aspect-[18/9]">
+                <Image
+                  src={heroImg}
+                  alt="PRECEA Signature extrait de parfum"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 90vw"
+                  className="object-cover object-center transition duration-700 group-hover:scale-105"
+                  priority={false}
+                />
+                <div
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-noir/90 via-noir/45 to-transparent"
+                  aria-hidden="true"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-noir/50 via-noir/20 to-transparent px-5 pb-5 pt-16 sm:px-8 sm:pb-8 sm:pt-24 lg:px-10 lg:pb-10 lg:pt-28">
+                  <div className="lg:flex lg:items-end lg:justify-between lg:gap-6">
+                    <div className="max-w-xl">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-champagne drop-shadow-sm">
+                        Extrait de parfum
+                      </p>
+                      <h3 className="mt-2 font-serif text-3xl font-semibold text-white drop-shadow-md sm:text-4xl lg:text-5xl">
+                        Signature
+                      </h3>
+                      <p className="mt-2 text-sm leading-6 text-white/90 drop-shadow-sm sm:text-base sm:leading-7">
+                      Premium perfume spray crafted with citrus, floral, woody, and musk notes.
+Long-lasting fragrance designed for everyday luxury and unforgettable impressions.
+                      </p>
+                    </div>
+                    <a
+                      href={whatsappUrl(buildSignatureOrderMessage())}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="button-primary mt-5 w-full shrink-0 bg-[#25D366] hover:bg-[#1ebe57] sm:w-auto lg:mt-0 dark:bg-[#25D366] dark:text-white dark:hover:bg-[#1ebe57]"
+                    >
+                      <WhatsAppIcon className="size-5" />
+                      Order on WhatsApp
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="bg-pearl py-20 dark:bg-white/5">
         <div className="container-luxe grid gap-12 lg:grid-cols-[minmax(0,280px)_1fr] lg:items-start lg:gap-16">
@@ -163,24 +222,26 @@ export default async function Home() {
       <section className="bg-ink py-20 text-silk dark:bg-white/5">
         <div className="container-luxe">
           <div className="max-w-2xl">
-            <p className="eyebrow text-champagne">Featured collections</p>
-            <h2 className="mt-3 font-serif text-5xl font-semibold">Compositions with a point of view</h2>
+            <p className="eyebrow text-champagne">FEATURED COLLECTIONS</p>
+            <h2 className="mt-3 font-serif text-5xl font-semibold">Discover Our Signature Attar Collections</h2>
           </div>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {collections.map((collection) => (
-              <Link
+              <article
                 key={collection.name}
-                href={`/products?collection=${encodeURIComponent(collection.name)}`}
                 className="group relative min-h-[380px] overflow-hidden rounded-xl"
               >
                 <Image src={collection.image} alt={collection.name} fill sizes="33vw" className="object-cover transition duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-noir/80 via-noir/20 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-7">
+                <div
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-noir/75 via-noir/35 to-transparent"
+                  aria-hidden="true"
+                />
+                <div className="absolute inset-x-0 bottom-0 px-5 pb-6 pt-10 sm:px-7 sm:pb-7">
                   <Sparkles className="mb-3 size-5 text-champagne" />
-                  <h3 className="font-serif text-3xl font-semibold">{collection.name}</h3>
-                  <p className="mt-2 text-sm leading-6 text-silk/75">{collection.copy}</p>
+                  <h3 className="font-serif text-3xl font-semibold text-silk drop-shadow-sm">{collection.name}</h3>
+                  <p className="mt-2 text-sm leading-6 text-silk/85 drop-shadow-sm">{collection.copy}</p>
                 </div>
-              </Link>
+              </article>
             ))}
           </div>
         </div>
@@ -188,10 +249,10 @@ export default async function Home() {
 
       <section className="container-luxe grid gap-12 py-20 lg:grid-cols-[.85fr_1.15fr] lg:items-center">
         <div>
-          <p className="eyebrow">The ritual</p>
-          <h2 className="mt-3 font-serif text-5xl font-semibold">Luxury made tactile, not loud</h2>
+          <p className="eyebrow">HERITAGE OF SCENT</p>
+          <h2 className="mt-3 font-serif text-5xl font-semibold">Crafted with Tradition. Refined for Today.</h2>
           <p className="mt-5 text-lg leading-8 text-ink/70 dark:text-silk/70">
-            Every PRECEA™ order is prepared with archival paper, discovery vials, and a care card matched to the fragrance family.
+          Every PRECEA™ attar is carefully blended using premium natural oils and traditional perfumery techniques. Our alcohol-free attars deliver rich, long-lasting fragrances that leave a timeless impression.
           </p>
           <a
             href={whatsappUrl(buildGeneralOrderMessage())}
@@ -199,7 +260,7 @@ export default async function Home() {
             rel="noopener noreferrer"
             className="button-primary mt-8 bg-[#25D366] hover:bg-[#1ebe57] dark:bg-[#25D366] dark:text-white dark:hover:bg-[#1ebe57]"
           >
-            <WhatsAppIcon className="size-4" />
+            <WhatsAppIcon className="size-5" />
             Order on WhatsApp
           </a>
         </div>
@@ -244,15 +305,18 @@ export default async function Home() {
             })}
           </div>
 
-          <div className="mt-8 rounded-full border border-[#e7d4ae] bg-[#fff8ea] px-4 py-3 dark:border-white/10 dark:bg-white/5">
-            <div className="grid gap-3 md:grid-cols-5">
+          <div className="mt-8 w-full max-w-full overflow-hidden rounded-2xl border border-[#e7d4ae] bg-[#fff8ea] px-4 py-4 sm:px-5 dark:border-white/10 dark:bg-white/5 md:rounded-full md:px-6 md:py-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
               {trustBadges.map((item) => {
                 const Icon = item.icon;
 
                 return (
-                  <div key={item.label} className="flex items-center justify-center gap-2 text-sm text-ink/80 dark:text-silk/80">
-                    <Icon className="size-4 text-[#b89149] dark:text-champagne" />
-                    <span>{item.label}</span>
+                  <div
+                    key={item.label}
+                    className="flex min-w-0 items-center justify-start gap-2 text-sm text-ink/80 sm:justify-center dark:text-silk/80"
+                  >
+                    <Icon className="size-4 shrink-0 text-[#b89149] dark:text-champagne" />
+                    <span className="leading-snug">{item.label}</span>
                   </div>
                 );
               })}

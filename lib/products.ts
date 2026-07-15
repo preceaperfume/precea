@@ -117,18 +117,18 @@ const fallbackProducts: Product[] = [
 
 export const collections = [
   {
-    name: "Nocturne Collection",
-    copy: "Smoky florals and ambered woods composed for evening ritual.",
+    name: "Black Opium",
+    copy: "A rich blend of warm spices, vanilla, and deep woody notes, crafted for those who appreciate a powerful and long-lasting signature fragrance.",
     image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1200&q=85"
   },
   {
-    name: "Atelier Reserve",
-    copy: "Rare materials, extrait strength, and intimate projection.",
+    name: "Kaaf",
+    copy: "A refreshing fusion of aquatic, citrus, and soft musk notes that delivers a clean, sophisticated scent perfect for everyday wear.",
     image: "https://images.unsplash.com/photo-1600612253971-422e7f7faeb6?auto=format&fit=crop&w=1200&q=85"
   },
   {
-    name: "Riviera Mornings",
-    copy: "Fresh signatures with linen, citrus, salt, and sun-warmed skin.",
+    name: "Kamrah",
+    copy: "An opulent composition of amber, vanilla, and precious woods, creating a smooth, rich, and unforgettable luxury attar experience.",
     image: "https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?auto=format&fit=crop&w=1200&q=85"
   }
 ];

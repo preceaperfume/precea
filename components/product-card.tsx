@@ -25,8 +25,8 @@ export function ProductCard({ product, featured = false }: { product: Product; f
   );
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-ink/10 bg-white/55 p-4 shadow-sm backdrop-blur-xl transition duration-300 hover:-translate-y-1.5 hover:border-ink/15 hover:shadow-luxe dark:border-white/10 dark:bg-white/10 dark:hover:border-white/15">
-      <Link href={`/products/${product.slug}`} className="block overflow-hidden rounded-lg bg-pearl dark:bg-white/10">
+    <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-champagne/35 bg-silk/85 p-4 shadow-sm backdrop-blur-xl transition duration-300 hover:-translate-y-1.5 hover:border-champagne/60 hover:shadow-luxe dark:border-white/10 dark:bg-white/10 dark:hover:border-white/15">
+      <Link href={`/products/${product.slug}`} className="block overflow-hidden rounded-lg bg-pearl/80 dark:bg-white/10">
         <div className={featured ? "relative aspect-[4/5]" : "relative aspect-[5/6]"}>
           <Image
             key={`${product.id}-${selectedSize}`}
@@ -38,7 +38,7 @@ export function ProductCard({ product, featured = false }: { product: Product; f
           />
           <div className="absolute inset-0 bg-gradient-to-t from-ink/45 via-ink/10 to-transparent" />
           {(product.bestseller || product.newArrival) && (
-            <span className="absolute left-3 top-3 rounded-full bg-silk/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-ink backdrop-blur">
+            <span className="absolute left-3 top-3 rounded-full bg-silk/95 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-ink backdrop-blur">
               {product.bestseller ? "Best seller" : "New"}
             </span>
           )}
@@ -60,7 +60,7 @@ export function ProductCard({ product, featured = false }: { product: Product; f
               if (!wished) openWishlist();
             }}
             aria-label={wished ? "Remove from wishlist" : "Add to wishlist"}
-            className="grid size-10 shrink-0 place-items-center rounded-full border border-ink/10 bg-white/40 transition hover:border-rosewood hover:bg-white/70 dark:border-white/10 dark:bg-white/10 dark:hover:bg-white/15"
+            className="grid size-10 shrink-0 place-items-center rounded-full border border-champagne/40 bg-pearl/70 transition hover:border-rosewood hover:bg-pearl dark:border-white/10 dark:bg-white/10 dark:hover:bg-white/15"
           >
             <Heart className={`size-4 ${wished ? "fill-rosewood text-rosewood dark:fill-champagne dark:text-champagne" : ""}`} />
           </button>
@@ -78,7 +78,7 @@ export function ProductCard({ product, featured = false }: { product: Product; f
                   className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
                     selectedSize === option.size
                       ? "border-ink bg-ink text-silk dark:border-silk dark:bg-silk dark:text-ink"
-                      : "border-ink/15 bg-white/45 text-ink/80 hover:border-ink/30 dark:border-white/15 dark:bg-white/10 dark:text-silk/85 dark:hover:border-white/30"
+                      : "border-champagne/45 bg-pearl/60 text-ink/80 hover:border-champagne hover:bg-pearl dark:border-white/15 dark:bg-white/10 dark:text-silk/85 dark:hover:border-white/30"
                   }`}
                 >
                   {option.size}
@@ -103,7 +103,7 @@ export function ProductCard({ product, featured = false }: { product: Product; f
           rel="noopener noreferrer"
           className="button-primary mt-4 w-full bg-[#25D366] hover:bg-[#1ebe57] dark:bg-[#25D366] dark:text-white dark:hover:bg-[#1ebe57]"
         >
-          <WhatsAppIcon className="size-4" />
+          <WhatsAppIcon className="size-5" />
           Order on WhatsApp
         </a>
       </div>
