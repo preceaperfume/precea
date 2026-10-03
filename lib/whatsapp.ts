@@ -36,6 +36,30 @@ export function buildSignatureOrderMessage() {
   ].join("\n");
 }
 
+export function buildWishlistOrderMessage(items: Product[]) {
+  if (items.length === 0) return buildGeneralOrderMessage();
+
+  const total = items.reduce((sum, item) => sum + item.price, 0);
+
+  const lines = [
+    "Hello PRECEA™, I would like to order the following from my Wishlist:",
+    ""
+  ];
+
+  items.forEach((item, index) => {
+    lines.push(
+      `${index + 1}. *${item.name}* (${item.size}) - ${formatPrice(item.price)}`
+    );
+  });
+
+  lines.push("");
+  lines.push(`*Estimated Total:* ${formatPrice(total)}`);
+  lines.push("");
+  lines.push("Please confirm availability and delivery details.");
+
+  return lines.join("\n");
+}
+
 export function whatsappUrl(message: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }

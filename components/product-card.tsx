@@ -3,22 +3,52 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Heart, Star } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Product } from "@/lib/products";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { formatPrice, getPrimaryProductImage, withSelectedSize } from "@/lib/products";
 import { buildProductOrderMessage, whatsappUrl } from "@/lib/whatsapp";
 import { useWishlistStore } from "@/store/wishlist";
+import { PerfumeLoader } from "@/components/perfume-loader";
 
 export function ProductCard({ product, featured = false }: { product: Product; featured?: boolean }) {
   const toggleWishlist = useWishlistStore((state) => state.toggleWishlist);
+  const updateItemSize = useWishlistStore((state) => state.updateItemSize);
   const openWishlist = useWishlistStore((state) => state.openWishlist);
-  const wishlist = useWishlistStore((state) => state.wishlist);
-  const wished = wishlist.includes(product.id);
+  const isWished = useWishlistStore((state) => state.isWished);
+  const getItemSize = useWishlistStore((state) => state.getItemSize);
+  const globalSize = useWishlistStore((state) => state.globalSize);
+
   const sizeOptions = product.sizes.length > 0 ? product.sizes : [{ size: product.size, price: product.price, images: product.images }];
-  const [selectedSize, setSelectedSize] = useState(product.size);
+  const savedSize = getItemSize(product.id);
+  const [selectedSize, setSelectedSize] = useState(() => savedSize || (globalSize !== "all" && sizeOptions.some(o => o.size.toLowerCase() === globalSize.toLowerCase()) ? globalSize : product.size));
+  const wished = isWished(product.id);
+
+  // Sync size when globalSize filter or saved wishlist size changes
+  useEffect(() => {
+    if (savedSize) {
+      setSelectedSize(savedSize);
+    } else if (globalSize && globalSize !== "all") {
+      const match = sizeOptions.find((opt) => opt.size.toLowerCase() === globalSize.toLowerCase());
+      if (match) setSelectedSize(match.size);
+    }
+  }, [globalSize, savedSize, sizeOptions]);
+
+  const handleSelectSize = (newSize: string) => {
+    setSelectedSize(newSize);
+    if (wished) {
+      updateItemSize(product.id, newSize);
+    }
+  };
+
   const selectedProduct = useMemo(() => withSelectedSize(product, selectedSize), [product, selectedSize]);
   const previewImage = getPrimaryProductImage(selectedProduct);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [previewImage]);
+
   const orderLink = useMemo(
     () => whatsappUrl(buildProductOrderMessage(selectedProduct)),
     [selectedProduct]
@@ -28,17 +58,34 @@ export function ProductCard({ product, featured = false }: { product: Product; f
     <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-champagne/35 bg-silk/85 p-4 shadow-sm backdrop-blur-xl transition duration-300 hover:-translate-y-1.5 hover:border-champagne/60 hover:shadow-luxe dark:border-white/10 dark:bg-white/10 dark:hover:border-white/15">
       <Link href={`/products/${product.slug}`} className="block overflow-hidden rounded-lg bg-pearl/80 dark:bg-white/10">
         <div className={featured ? "relative aspect-[4/5]" : "relative aspect-[5/6]"}>
+          {/* Creative Perfume Loader: stays visible with smooth transition until image loads */}
+          <div
+            className={`transition-all duration-700 ${
+              imageLoaded ? "opacity-0 pointer-events-none scale-95" : "opacity-100 scale-100"
+            }`}
+          >
+            <PerfumeLoader
+              variant="card"
+              sizeLabel={selectedSize}
+              productName={product.name}
+            />
+          </div>
+
           <Image
             key={`${product.id}-${selectedSize}`}
             src={previewImage}
             alt={`${product.name} ${selectedSize} bottle`}
             fill
-            sizes="(max-width: 768px) 90vw, 33vw"
-            className="object-cover transition duration-500 group-hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            quality={82}
+            className={`object-cover transition-all duration-700 group-hover:scale-105 ${
+              imageLoaded ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-105 blur-sm"
+            }`}
+            onLoad={() => setImageLoaded(true)}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/45 via-ink/10 to-transparent" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/45 via-ink/10 to-transparent" />
           {(product.bestseller || product.newArrival) && (
-            <span className="absolute left-3 top-3 rounded-full bg-silk/95 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-ink backdrop-blur">
+            <span className="absolute left-3 top-3 z-10 rounded-full bg-silk/95 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-ink backdrop-blur">
               {product.bestseller ? "Best seller" : "New"}
             </span>
           )}
@@ -56,11 +103,11 @@ export function ProductCard({ product, featured = false }: { product: Product; f
           <button
             type="button"
             onClick={() => {
-              toggleWishlist(product.id);
+              toggleWishlist(product.id, selectedSize);
               if (!wished) openWishlist();
             }}
             aria-label={wished ? "Remove from wishlist" : "Add to wishlist"}
-            className="grid size-10 shrink-0 place-items-center rounded-full border border-champagne/40 bg-pearl/70 transition hover:border-rosewood hover:bg-pearl dark:border-white/10 dark:bg-white/10 dark:hover:bg-white/15"
+            className="grid size-10 shrink-0 place-items-center rounded-full border border-champagne/40 bg-pearl/70 transition hover:border-rosewood hover:bg-pearl touch-manipulation dark:border-white/10 dark:bg-white/10 dark:hover:bg-white/15"
           >
             <Heart className={`size-4 ${wished ? "fill-rosewood text-rosewood dark:fill-champagne dark:text-champagne" : ""}`} />
           </button>
@@ -74,8 +121,8 @@ export function ProductCard({ product, featured = false }: { product: Product; f
                 <button
                   key={option.size}
                   type="button"
-                  onClick={() => setSelectedSize(option.size)}
-                  className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
+                  onClick={() => handleSelectSize(option.size)}
+                  className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition touch-manipulation ${
                     selectedSize === option.size
                       ? "border-ink bg-ink text-silk dark:border-silk dark:bg-silk dark:text-ink"
                       : "border-champagne/45 bg-pearl/60 text-ink/80 hover:border-champagne hover:bg-pearl dark:border-white/15 dark:bg-white/10 dark:text-silk/85 dark:hover:border-white/30"

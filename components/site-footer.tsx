@@ -1,5 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Instagram, Mail, Facebook } from "lucide-react";
+import preceaLogo from "@/app/precea.png";
 import { NewsletterForm } from "@/components/newsletter-form";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { buildGeneralOrderMessage, whatsappUrl } from "@/lib/whatsapp";
@@ -7,12 +9,16 @@ import { buildGeneralOrderMessage, whatsappUrl } from "@/lib/whatsapp";
 export function SiteFooter() {
   return (
     <footer className="border-t border-ink/10 bg-ink text-silk dark:border-white/10 dark:bg-noir">
-      <div className="container-luxe grid gap-10 py-12 md:grid-cols-[1.2fr_.8fr]">
+      <div className="container-luxe grid gap-8 sm:gap-10 py-10 sm:py-12 md:grid-cols-[1.2fr_.8fr]">
         <div>
-          <p className="inline-flex items-start font-serif text-3xl font-semibold">
-            <span>PRECEA</span>
-            <span className="-ml-1 -mt-0.4 text-[0.25em] leading-none tracking-normal">TM</span>
-          </p>
+          <Link href="/" className="inline-flex items-center">
+            <Image
+              src={preceaLogo}
+              alt="PRECEA"
+              height={50}
+              className="h-10 sm:h-12 w-auto object-contain brightness-0 invert transition hover:opacity-90"
+            />
+          </Link>
           <p className="mt-4 max-w-sm text-sm leading-6 text-silk/70">
             A modern fragrance house composing rare materials into cinematic signatures for daily ritual.
           </p>
@@ -23,7 +29,7 @@ export function SiteFooter() {
                 href="https://www.instagram.com/preceaperfume?igsh=cHB5dHZxNWljcHhn"
                 aria-label="Social link"
                 target="_blank"
-                className="grid size-10 place-items-center rounded-full border border-white/12 transition hover:border-champagne hover:text-champagne"
+                className="grid size-10 place-items-center rounded-full border border-white/12 transition hover:border-champagne hover:text-champagne touch-manipulation"
               >
                 <Icon className="size-5" />
               </a>
@@ -33,7 +39,7 @@ export function SiteFooter() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Order on WhatsApp"
-              className="grid size-10 place-items-center rounded-full border border-white/12 transition hover:border-[#25D366] hover:text-[#25D366]"
+              className="grid size-10 place-items-center rounded-full border border-white/12 transition hover:border-[#25D366] hover:text-[#25D366] touch-manipulation"
             >
               <WhatsAppIcon className="size-6" />
             </a>

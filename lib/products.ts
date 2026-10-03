@@ -1,3 +1,5 @@
+import localDataJson from "@/data.json";
+
 export type ProductSize = {
   size: string;
   price: number;
@@ -68,98 +70,6 @@ type ApiProduct = {
 export const DEFAULT_PRODUCT_PREVIEW_IMAGE =
   "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=1200&q=85";
 
-export const GITHUB_PRODUCTS_URL =
-  "https://raw.githubusercontent.com/preceaperfume/precea/main/data.json";
-
-const fallbackProducts: Product[] = [
-  {
-    id: "attar-01",
-    slug: "black-opium-attar-for-men-sweet-vanilla-soft-spicy-long-lasting-alcohol-free-perfume-oil-roll-on",
-    name: "Black Opium Attar",
-    collection: "Exotic Attars",
-    price: 349,
-    size: "12 ml",
-    sizes: [
-      {
-        size: "8 ml",
-        price: 249,
-        images: [
-          "https://upload.meeshosupplyassets.com/cataloging/1783141113975/ChatGPTImageMay14202605_44_02PM.png"
-        ]
-      },
-      {
-        size: "12 ml",
-        price: 349,
-        images: [
-          "https://upload.meeshosupplyassets.com/cataloging/1783141113975/ChatGPTImageMay14202605_44_02PM.png"
-        ]
-      }
-    ],
-    mood: "Damask rose, honeyed petals, warm sandalwood oil",
-    intensity: "Strong",
-    family: "Oriental Vanilla",
-    rating: 4.9,
-    reviews: 156,
-    kind: "attar",
-    bestseller: true,
-    notes: {
-      top: ["Pink Pepper", "Orange Blossom", "Pear"],
-      heart: ["Coffee", "Jasmine", "Bitter Almond", "Licorice"],
-      base: ["Vanilla", "Patchouli", "Cedarwood", "Cashmere Wood"]
-    },
-    description:
-      "Black Opium Attar is a rich blend of warm vanilla, bold coffee, and delicate white florals, creating a sensual and captivating fragrance. Its long-lasting alcohol-free formula is perfect for everyday wear as well as evenings and special occasions.",
-    images: [
-      "https://upload.meeshosupplyassets.com/cataloging/1783141113975/ChatGPTImageMay14202605_44_02PM.png"
-    ]
-  }
-];
-
-export const collections = [
-  {
-    name: "Black Opium",
-    copy: "A rich blend of warm spices, vanilla, and deep woody notes, crafted for those who appreciate a powerful and long-lasting signature fragrance.",
-    image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1200&q=85"
-  },
-  {
-    name: "Kaaf",
-    copy: "A refreshing fusion of aquatic, citrus, and soft musk notes that delivers a clean, sophisticated scent perfect for everyday wear.",
-    image: "https://images.unsplash.com/photo-1600612253971-422e7f7faeb6?auto=format&fit=crop&w=1200&q=85"
-  },
-  {
-    name: "Kamrah",
-    copy: "An opulent composition of amber, vanilla, and precious woods, creating a smooth, rich, and unforgettable luxury attar experience.",
-    image: "https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?auto=format&fit=crop&w=1200&q=85"
-  }
-];
-
-export const testimonials: Testimonial[] = [
-  {
-    id: "testimonial-01",
-    name: "Ravi chavda",
-    city: "Surat",
-    quote: "Velvet Iris feels premium from opening to dry down. Smooth projection and elegant for evening wear.",
-    rating: 5,
-    productSlug: "black-opium-attar-for-men-sweet-vanilla-soft-spicy-long-lasting-alcohol-free-perfume-oil-roll-on"
-  },
-  {
-    id: "testimonial-02",
-    name: "Hiba Shaikh",
-    city: "Hyderabad",
-    quote: "Gulab Noor Attar lasts all day on my skin. Rich rose with beautiful sandalwood warmth.",
-    rating: 5,
-    productSlug: "gulab-noor-attar"
-  },
-  {
-    id: "testimonial-03",
-    name: "Rehan Ali",
-    city: "Delhi",
-    quote: "Packaging and support were excellent, and the scent quality is way above what I expected.",
-    rating: 4,
-    productSlug: "velvet-iris-absolu"
-  }
-];
-
 function asString(value: unknown, fallback = "") {
   return typeof value === "string" ? value : fallback;
 }
@@ -224,8 +134,8 @@ function normalizeSizeLabel(value: string) {
 
 function preferDefaultSize(sizes: ProductSize[]) {
   return (
-    sizes.find((item) => normalizeSizeLabel(item.size).toLowerCase() === "12 ml") ??
-    sizes[sizes.length - 1] ??
+    sizes.find((item) => normalizeSizeLabel(item.size).toLowerCase() === "8 ml") ??
+    sizes[0] ??
     null
   );
 }
@@ -295,9 +205,9 @@ export function normalizeProduct(raw: unknown): Product | null {
     mood: asString(source.mood),
     intensity: asString(source.intensity),
     family: asString(source.family),
-    rating: asNumber(source.rating),
-    reviews: asNumber(source.reviews),
-    kind: normalizeKind(source.kind),
+    rating: asNumber(source.rating, 4.8),
+    reviews: asNumber(source.reviews, 120),
+    kind: normalizeKind(source.kind) ?? "attar",
     notes: normalizeNotes(source.notes),
     description: asString(source.description),
     images: selected.images,
@@ -306,10 +216,65 @@ export function normalizeProduct(raw: unknown): Product | null {
   };
 }
 
-function normalizeProducts(payload: unknown): Product[] {
+export function normalizeProducts(payload: unknown): Product[] {
   const rows = Array.isArray(payload) ? payload : payload ? [payload] : [];
   return rows.map(normalizeProduct).filter((item): item is Product => item !== null);
 }
+
+// ---------------------------------------------------------
+// Load and Normalize ALL products from data.json directly
+// ---------------------------------------------------------
+export const allLocalProducts: Product[] = normalizeProducts(localDataJson);
+
+export const fallbackProducts: Product[] = allLocalProducts;
+export const products: Product[] = allLocalProducts;
+export const attars: Product[] = allLocalProducts.filter((product) => product.kind === "attar" || !product.kind);
+export const perfumes: Product[] = allLocalProducts.filter((product) => product.kind === "parfum");
+
+export const collections = [
+  {
+    name: "Black Opium",
+    copy: "A rich blend of warm spices, vanilla, and deep woody notes, crafted for those who appreciate a powerful and long-lasting signature fragrance.",
+    image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1200&q=85"
+  },
+  {
+    name: "Kaaf",
+    copy: "A refreshing fusion of aquatic, citrus, and soft musk notes that delivers a clean, sophisticated scent perfect for everyday wear.",
+    image: "https://images.unsplash.com/photo-1600612253971-422e7f7faeb6?auto=format&fit=crop&w=1200&q=85"
+  },
+  {
+    name: "Kamrah",
+    copy: "An opulent composition of amber, vanilla, and precious woods, creating a smooth, rich, and unforgettable luxury attar experience.",
+    image: "https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?auto=format&fit=crop&w=1200&q=85"
+  }
+];
+
+export const testimonials: Testimonial[] = [
+  {
+    id: "testimonial-01",
+    name: "Jay Gamit",
+    city: "Surat",
+    quote: "Amazing fragrance with a premium feel. Precea Attar CR7 smells fresh, classy, and lasts really well.",
+    rating: 5,
+    productSlug: "cr7-roll-on-attar"
+  },
+  {
+    id: "testimonial-02",
+    name: "Ravi chavda",
+    city: "Surat",
+    quote: "Black Opium has a rich, classy fragrance with a smooth and long-lasting scent. Really loved it!",
+    rating: 5,
+    productSlug: "black-opium-attar-for-men-sweet-vanilla-soft-spicy-long-lasting-alcohol-free-perfume-oil-roll-on"
+  },
+  {
+    id: "testimonial-03",
+    name: "Hiba Shaikh",
+    city: "Mumbai",
+    quote: "Very attractive fragrance with a fresh and elegant feel. Lasts really well and feels premium.",
+    rating: 5,
+    productSlug: "dunhill-desire-roll-on-attar"
+  }
+];
 
 export function getProductSizeOption(product: Product, sizeLabel: string) {
   const target = normalizeSizeLabel(sizeLabel).toLowerCase();
@@ -331,23 +296,33 @@ export function withSelectedSize(product: Product, sizeLabel: string): Product {
   };
 }
 
-export async function fetchProductsFromGithub(): Promise<Product[]> {
-  try {
-    const response = await fetch(GITHUB_PRODUCTS_URL, {
-      next: { revalidate: 60 }
-    });
-    if (!response.ok) return fallbackProducts;
+let cachedProducts: Product[] | null = null;
 
-    const payload = (await response.json()) as unknown;
-    const remoteProducts = normalizeProducts(payload);
-    return remoteProducts.length > 0 ? remoteProducts : fallbackProducts;
-  } catch {
-    return fallbackProducts;
-  }
-}
-
+/**
+ * Returns all products loaded dynamically from data.json on disk (server) or bundled data.json.
+ * Cached in-memory to deliver maximum throughput and instantaneous response times.
+ */
 export async function getProducts(): Promise<Product[]> {
-  return fetchProductsFromGithub();
+  if (cachedProducts) return cachedProducts;
+
+  if (typeof window === "undefined") {
+    try {
+      const fs = await import("fs/promises");
+      const path = await import("path");
+      const filePath = path.join(process.cwd(), "data.json");
+      const fileContent = await fs.readFile(filePath, "utf-8");
+      const parsed = JSON.parse(fileContent);
+      const normalized = normalizeProducts(parsed);
+      if (normalized.length > 0) {
+        cachedProducts = normalized;
+        return normalized;
+      }
+    } catch {
+      // Fallback to imported JSON module
+    }
+  }
+  cachedProducts = allLocalProducts;
+  return allLocalProducts;
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | undefined> {
@@ -365,17 +340,15 @@ export function getPrimaryProductImage(product: Product) {
 
 export async function getPerfumes(): Promise<Product[]> {
   const allProducts = await getProducts();
-  return allProducts.filter((product) => product.kind !== "attar");
+  const perfumesList = allProducts.filter((product) => product.kind === "parfum");
+  return perfumesList.length > 0 ? perfumesList : allProducts;
 }
 
 export async function getAttars(): Promise<Product[]> {
   const allProducts = await getProducts();
-  return allProducts.filter((product) => product.kind === "attar");
+  const attarsList = allProducts.filter((product) => product.kind === "attar" || !product.kind);
+  return attarsList.length > 0 ? attarsList : allProducts;
 }
-
-export const products = fallbackProducts;
-export const perfumes = products.filter((product) => product.kind !== "attar");
-export const attars = products.filter((product) => product.kind === "attar");
 
 export const formatPrice = (price: number) =>
   new Intl.NumberFormat("en-US", {
